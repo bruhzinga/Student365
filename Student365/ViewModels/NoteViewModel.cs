@@ -89,12 +89,14 @@ namespace Student365.ViewModels
 
         public ICommand SubmitCommand { get; }
         public ICommand AddNoteCommand { get; }
+        public ICommand DeleteNoteCommand { get; }
 
         public NoteViewModel()
         {
             _notes = UnitOfWork.NotesRepository.GetAllNotesByUser(UnitOfWork.CurrentsUser.UserName);
             SubmitCommand = new SubmitNoteCommand(this);
             AddNoteCommand = new AddNoteCommand(this);
+            DeleteNoteCommand = new DeleteNoteCommand(this);
         }
     }
 }

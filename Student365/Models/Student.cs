@@ -24,8 +24,11 @@ namespace Student365.Models
         public int Id { get; set; }
         public short Group { get; set; }
         public int Kurs { get; set; }
+        public short SubGroup { get; set; }
+        public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
+        public virtual User User { get; set; }
     }
 }

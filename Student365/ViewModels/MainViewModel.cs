@@ -21,7 +21,7 @@ namespace Student365.ViewModels
             _navigationStore.CurrentViewModelChanged += OnCuurentViewModelChanged;
             NavigateToScheduleCommand = new NavigateCommand(_navigationStore, new ScheduleViewModel());
             NavigateToGroupViewCommand = new NavigateCommand(_navigationStore, new GroupViewModel());
-            NavigateToNoteCommand = new NavigateCommand(_navigationStore, new NoteViewModel());
+            NavigateToNoteCommand = new NavigateCommand(_navigationStore, new LabWorksViewModel());
         }
 
         private void OnCuurentViewModelChanged()

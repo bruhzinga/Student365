@@ -12,11 +12,14 @@ namespace Student365.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class LabWork
     {
-        public string Username { get; set; }
-        public short Grade1 { get; set; }
+        public int Id { get; set; }
         public string Subject { get; set; }
+        public string Username { get; set; }
+        public Nullable<int> Max_amount_of_Labs { get; set; }
+        public Nullable<int> Current_amount_of_Labs { get; set; }
+        public Nullable<int> Completion { get; set; }
     
         public virtual Subject Subject1 { get; set; }
         public virtual User User { get; set; }

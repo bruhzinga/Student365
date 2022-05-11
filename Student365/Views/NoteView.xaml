@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
              xmlns:local="clr-namespace:Student365.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -31,6 +32,7 @@
             <StackPanel Grid.Row="1">
                 <TextBox Style="{StaticResource MaterialDesignTextBox}" Cursor="Arrow" Text="{Binding NewNoteHeader,UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TextWrapping="Wrap"></TextBox>
                 <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="BlueViolet" Content="Add note" Command="{Binding AddNoteCommand}" Cursor="Hand" />
+                <Button Style="{StaticResource MaterialDesignFlatDarkButton}" Background="Red" Command="{Binding DeleteNoteCommand}" Margin="0,10,0,0 " >Delete Note</Button>
             </StackPanel>
         </Grid>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,12 @@ namespace Student365.Models.Repositories
                 Text = string.Empty,
                 Username = UnitOfWork.CurrentsUser.UserName
             });
+            Update();
+        }
+
+        public void Delete(Note selected)
+        {
+            _dbSet.Remove(selected);
             Update();
         }
     }

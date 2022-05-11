@@ -11,11 +11,11 @@
           <Key>
             <PropertyRef Name="Username" />
             <PropertyRef Name="Grade" />
-            <PropertyRef Name="subject ID" />
+            <PropertyRef Name="Subject" />
           </Key>
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Grade" Type="smallint" Nullable="false" />
-          <Property Name="subject ID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Groups">
           <Key>
@@ -24,6 +24,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Student id" Type="int" />
           <Property Name="Teacher id" Type="int" />
+        </EntityType>
+        <EntityType Name="LabWorks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Max amount of Labs" Type="int" />
+          <Property Name="Current amount of Labs" Type="int" />
+          <Property Name="Completion" Type="int" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Notes">
           <Key>
@@ -42,14 +53,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Group" Type="smallint" Nullable="false" />
           <Property Name="Kurs" Type="int" Nullable="false" />
+          <Property Name="SubGroup" Type="smallint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Subjects">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Teachers">
           <Key>
@@ -67,19 +78,19 @@
           <Property Name="Role" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Grades__subject __5629CD9C">
+        <Association Name="FK__Grades__Subject__06CD04F7">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Name" />
             </Principal>
             <Dependent Role="Grades">
-              <PropertyRef Name="subject ID" />
+              <PropertyRef Name="Subject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Grades__Username__5535A963">
+        <Association Name="FK__Grades__Username__05D8E0BE">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,6 +126,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LabWorks__Subjec__02084FDA">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="LabWorks" Type="Self.LabWorks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="LabWorks">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabWorks__Userna__02FC7413">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LabWorks" Type="Self.LabWorks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="LabWorks">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Notes__Username__4CA06362">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
@@ -124,6 +159,18 @@
             </Principal>
             <Dependent Role="Notes">
               <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__UserNa__59FA5E80">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="UserName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -141,6 +188,7 @@
         </Association>
         <EntityContainer Name="Хранилище Student365ModelContainer">
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabWorks" EntityType="Self.LabWorks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
@@ -150,14 +198,14 @@
             <DefiningQuery>SELECT 
     [Grades].[Username] AS [Username], 
     [Grades].[Grade] AS [Grade], 
-    [Grades].[subject ID] AS [subject ID]
+    [Grades].[Subject] AS [Subject]
     FROM [dbo].[Grades] AS [Grades]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Grades__subject __5629CD9C" Association="Self.FK__Grades__subject __5629CD9C">
+          <AssociationSet Name="FK__Grades__Subject__06CD04F7" Association="Self.FK__Grades__Subject__06CD04F7">
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="Grades" EntitySet="Grades" />
           </AssociationSet>
-          <AssociationSet Name="FK__Grades__Username__5535A963" Association="Self.FK__Grades__Username__5535A963">
+          <AssociationSet Name="FK__Grades__Username__05D8E0BE" Association="Self.FK__Grades__Username__05D8E0BE">
             <End Role="Users" EntitySet="Users" />
             <End Role="Grades" EntitySet="Grades" />
           </AssociationSet>
@@ -169,9 +217,21 @@
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
+          <AssociationSet Name="FK__LabWorks__Subjec__02084FDA" Association="Self.FK__LabWorks__Subjec__02084FDA">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="LabWorks" EntitySet="LabWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabWorks__Userna__02FC7413" Association="Self.FK__LabWorks__Userna__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LabWorks" EntitySet="LabWorks" />
+          </AssociationSet>
           <AssociationSet Name="FK__Notes__Username__4CA06362" Association="Self.FK__Notes__Username__4CA06362">
             <End Role="Users" EntitySet="Users" />
             <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__UserNa__59FA5E80" Association="Self.FK__Students__UserNa__59FA5E80">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="Teachers_username" Association="Self.Teachers_username">
             <End Role="Users" EntitySet="Users" />
@@ -193,6 +253,19 @@
           <NavigationProperty Name="Student" Relationship="Self.FK__Groups__Student___49C3F6B7" FromRole="Groups" ToRole="Students" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__Groups__Teacher___4AB81AF0" FromRole="Groups" ToRole="Teachers" />
         </EntityType>
+        <EntityType Name="LabWork">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Max_amount_of_Labs" Type="Int32" />
+          <Property Name="Current_amount_of_Labs" Type="Int32" />
+          <Property Name="Completion" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="LabWorks" ToRole="Subjects" />
+          <NavigationProperty Name="User" Relationship="Self.FK__LabWorks__Userna__02FC7413" FromRole="LabWorks" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Note">
           <Key>
             <PropertyRef Name="Id" />
@@ -211,16 +284,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Group" Type="Int16" Nullable="false" />
           <Property Name="Kurs" Type="Int32" Nullable="false" />
+          <Property Name="SubGroup" Type="Int16" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Groups" Relationship="Self.FK__Groups__Student___49C3F6B7" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Students__UserNa__59FA5E80" FromRole="Students" ToRole="Users" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK__Grades__subject___5629CD9C" FromRole="Subjects" ToRole="Grades" />
+          <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="Subjects" ToRole="LabWorks" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK__Grades__Subject__06CD04F7" FromRole="Subjects" ToRole="Grades" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -239,21 +314,23 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Userna__02FC7413" FromRole="Users" ToRole="LabWorks" />
           <NavigationProperty Name="Notes" Relationship="Self.FK__Notes__Username__4CA06362" FromRole="Users" ToRole="Notes" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__UserNa__59FA5E80" FromRole="Users" ToRole="Students" />
           <NavigationProperty Name="Teachers" Relationship="Self.Teachers_username" FromRole="Users" ToRole="Teachers" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK__Grades__Username__5535A963" FromRole="Users" ToRole="Grades" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK__Grades__Username__05D8E0BE" FromRole="Users" ToRole="Grades" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
             <PropertyRef Name="Username" />
             <PropertyRef Name="Grade1" />
-            <PropertyRef Name="subject_ID" />
+            <PropertyRef Name="Subject" />
           </Key>
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Grade1" Type="Int16" Nullable="false" />
-          <Property Name="subject_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Subject" Relationship="Self.FK__Grades__subject___5629CD9C" FromRole="Grades" ToRole="Subjects" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Grades__Username__5535A963" FromRole="Grades" ToRole="Users" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Grades__Subject__06CD04F7" FromRole="Grades" ToRole="Subjects" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Grades__Username__05D8E0BE" FromRole="Grades" ToRole="Users" />
         </EntityType>
         <Association Name="FK__Groups__Student___49C3F6B7">
           <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
@@ -279,6 +356,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LabWorks__Subjec__02084FDA">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="LabWorks" Type="Self.LabWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="LabWorks">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LabWorks__Userna__02FC7413">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LabWorks" Type="Self.LabWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="LabWorks">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Notes__Username__4CA06362">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Notes" Type="Self.Note" Multiplicity="*" />
@@ -291,15 +392,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Grades__subject___5629CD9C">
+        <Association Name="FK__Students__UserNa__59FA5E80">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grades__Subject__06CD04F7">
           <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Name" />
             </Principal>
             <Dependent Role="Grades">
-              <PropertyRef Name="subject_ID" />
+              <PropertyRef Name="Subject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -315,7 +428,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Grades__Username__5535A963">
+        <Association Name="FK__Grades__Username__05D8E0BE">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
           <ReferentialConstraint>
@@ -329,6 +442,7 @@
         </Association>
         <EntityContainer Name="Student365Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="LabWorks" EntityType="Self.LabWork" />
           <EntitySet Name="Notes" EntityType="Self.Note" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
@@ -343,11 +457,23 @@
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
+          <AssociationSet Name="FK__LabWorks__Subjec__02084FDA" Association="Self.FK__LabWorks__Subjec__02084FDA">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="LabWorks" EntitySet="LabWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LabWorks__Userna__02FC7413" Association="Self.FK__LabWorks__Userna__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LabWorks" EntitySet="LabWorks" />
+          </AssociationSet>
           <AssociationSet Name="FK__Notes__Username__4CA06362" Association="Self.FK__Notes__Username__4CA06362">
             <End Role="Users" EntitySet="Users" />
             <End Role="Notes" EntitySet="Notes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Grades__subject___5629CD9C" Association="Self.FK__Grades__subject___5629CD9C">
+          <AssociationSet Name="FK__Students__UserNa__59FA5E80" Association="Self.FK__Students__UserNa__59FA5E80">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grades__Subject__06CD04F7" Association="Self.FK__Grades__Subject__06CD04F7">
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="Grades" EntitySet="Grades" />
           </AssociationSet>
@@ -355,7 +481,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Grades__Username__5535A963" Association="Self.FK__Grades__Username__5535A963">
+          <AssociationSet Name="FK__Grades__Username__05D8E0BE" Association="Self.FK__Grades__Username__05D8E0BE">
             <End Role="Users" EntitySet="Users" />
             <End Role="Grades" EntitySet="Grades" />
           </AssociationSet>
@@ -372,6 +498,18 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Student_id" ColumnName="Student id" />
                 <ScalarProperty Name="Teacher_id" ColumnName="Teacher id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabWorks">
+            <EntityTypeMapping TypeName="Student365Model.LabWork">
+              <MappingFragment StoreEntitySet="LabWorks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Max_amount_of_Labs" ColumnName="Max amount of Labs" />
+                <ScalarProperty Name="Current_amount_of_Labs" ColumnName="Current amount of Labs" />
+                <ScalarProperty Name="Completion" ColumnName="Completion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -392,6 +530,8 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Kurs" ColumnName="Kurs" />
+                <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -399,8 +539,6 @@
             <EntityTypeMapping TypeName="Student365Model.Subject">
               <MappingFragment StoreEntitySet="Subjects">
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -427,7 +565,7 @@
               <MappingFragment StoreEntitySet="Grades">
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Grade1" ColumnName="Grade" />
-                <ScalarProperty Name="subject_ID" ColumnName="subject ID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

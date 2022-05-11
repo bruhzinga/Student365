@@ -17,6 +17,23 @@ namespace Student365.Commands
         public SubmitNoteCommand(NoteViewModel noteViewModel)
         {
             _noteViewModel = noteViewModel;
+            _noteViewModel.PropertyChanged += _noteViewModel_PropertyChanged;
+        }
+
+        private void _noteViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedNote")
+            {
+                OnCanExecuteChanged();
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            if (_noteViewModel.SelectedNote == null)
+                return false;
+
+            return true;
         }
 
         public override void Execute(object parameter)
