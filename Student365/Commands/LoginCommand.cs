@@ -16,16 +16,9 @@ namespace Student365.Commands
 
         public override void Execute(object? parameter)
         {
-            var users = UnitOfWork.UsersRepository;
-
-            var user = users.GetUser(_viewModel.Username, _viewModel.Password);
-            if (user == null)
+            void ShowNewWindow(object o)
             {
-                MessageBox.Show("BRUH");
-            }
-            else
-            {
-                UnitOfWork.CurrentsUser = (User)user;
+                UnitOfWork.CurrentsUser = (User)o;
                 var sw = new MainWindow();
                 Application.Current.MainWindow.Close();
                 sw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -35,14 +28,26 @@ namespace Student365.Commands
                 System.Windows.Application.Current.MainWindow = sw;
                 sw.Show();
             }
+
+            var users = UnitOfWork.UsersRepository;
+
+            var user = users.GetUser("Admin", "Admin");
+            if (user == null)
+            {
+                MessageBox.Show("Wrong Password or Login");
+            }
+            else
+            {
+                ShowNewWindow(user);
+            }
         }
 
-        public override bool CanExecute(object? parameter)
+        /*public override bool CanExecute(object? parameter)
         {
             if (string.IsNullOrEmpty(_viewModel.Username) || string.IsNullOrEmpty(_viewModel.Password))
                 return false;
             return true;
-        }
+        }*/
 
         public LoginCommand(LoginViewModel viewModel)
         {

@@ -1,12 +1,47 @@
 ﻿<UserControl x:Class="Student365.Views.NoteView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border BorderThickness="2" BorderBrush="Black">
+                <ListView Grid.Column="0" Style="{StaticResource MaterialDesignListView}"   ItemsSource="{Binding Notes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding  SelectedNote,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Header,Mode=TwoWay}"  HorizontalAlignment="Center" TextAlignment="Center" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <StackPanel Grid.Row="1">
+                <TextBox Style="{StaticResource MaterialDesignTextBox}" Cursor="Arrow" Text="{Binding NewNoteHeader,UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TextWrapping="Wrap"></TextBox>
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="BlueViolet" Content="Add note" Command="{Binding AddNoteCommand}" Cursor="Hand" />
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" Padding="5,5,5,50" CornerRadius="2">
+            <StackPanel>
+                <TextBox Style="{StaticResource MaterialDesignTextBox}" Foreground="Black" Text="{Binding SelectedName}" HorizontalAlignment="Center" ></TextBox>
+                <TextBox  Style="{StaticResource MaterialDesignTextBox}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Text}" Foreground="Black" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" MinWidth="400" MinHeight="200" Background="Azure" TextWrapping="Wrap">
+                </TextBox>
+            </StackPanel>
+        </Border>
+
+        <Button Grid.Column="1" Content="Confirm" HorizontalAlignment="Right"  Command="{Binding SubmitCommand}" VerticalAlignment="Bottom" Margin="100" Cursor="Hand" Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
     </Grid>
 </UserControl>

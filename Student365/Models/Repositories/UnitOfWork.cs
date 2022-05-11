@@ -12,6 +12,8 @@ namespace Student365.Models.Repositories
 
         public static UsersRepository UsersRepository { get; set; } = new UsersRepository();
 
+        public static NoteRepository NotesRepository { get; set; } = new NoteRepository();
+
         public static User CurrentsUser { get; set; }
     }
 }

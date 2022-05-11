@@ -43,6 +43,9 @@
             <DataTemplate DataType="{x:Type vms:GroupViewModel}">
                 <views:GroupView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:NoteViewModel}">
+                <views:NoteView />
+            </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
@@ -96,7 +99,13 @@
                                 <TextBlock Text="Progress" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />
                             </StackPanel>
                         </ListViewItem>
+
                         <ListViewItem Height="70" x:Name="TimeTable_List">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="PreviewMouseDown">
+                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToNoteCommand}" />
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
                                 <TextBlock Text="Timetable" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />

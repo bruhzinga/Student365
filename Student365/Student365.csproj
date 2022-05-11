@@ -177,6 +177,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Annotations.cs" />
+    <Compile Include="Commands\AddNoteCommand.cs" />
+    <Compile Include="Commands\SubmitNoteCommand.cs" />
     <Compile Include="LoginWindow.xaml.cs" />
     <Compile Include="Models\DataBaseContext.cs" />
     <Compile Include="Models\Grade.cs">
@@ -204,6 +206,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositories\IGenericRepository.cs" />
+    <Compile Include="Models\Repositories\NoteRepository.cs" />
     <Compile Include="Models\Repositories\UnitOfWork.cs" />
     <Compile Include="Models\Repositories\UsersRepository.cs" />
     <Compile Include="Models\Student.cs">
@@ -223,6 +226,7 @@
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="Views\GradeView.xaml.cs" />
     <Compile Include="Views\GroupView.xaml.cs" />
@@ -283,8 +287,8 @@
   <ItemGroup>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

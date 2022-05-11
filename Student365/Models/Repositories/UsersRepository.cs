@@ -53,22 +53,17 @@ namespace Student365.Models.Repositories
 
         public void AddAdmin()
         {
-            var Hash = SHA256.Create();
-            byte[] data = Hash.ComputeHash(Encoding.UTF8.GetBytes("Admin"));
             Create(new User()
             {
                 UserName = "Admin",
                 Role = "Admin",
-                PasswordHash = data
+                Password = "Admin"
             });
         }
 
         public object GetUser(string viewModelUsername, string viewModelPassword)
         {
-            var Hash = SHA256.Create();
-            byte[] data = Hash.ComputeHash(Encoding.UTF8.GetBytes(viewModelPassword));
-
-            return _dbSet.FirstOrDefault(x => x.UserName == viewModelUsername && x.PasswordHash == data);
+            return _dbSet.FirstOrDefault(x => x.UserName == viewModelUsername && x.Password == viewModelPassword);
         }
     }
 }
