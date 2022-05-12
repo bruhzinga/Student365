@@ -93,7 +93,7 @@
                         <ListViewItem x:Name="Progress" Height="70">
                             <behaviors:Interaction.Triggers>
                                 <behaviors:EventTrigger EventName="PreviewMouseDown">
-                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToScheduleCommand}" />
+                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToNoteCommand}" />
                                 </behaviors:EventTrigger>
                             </behaviors:Interaction.Triggers>
 
@@ -106,7 +106,7 @@
                         <ListViewItem Height="70" x:Name="TimeTable_List">
                             <behaviors:Interaction.Triggers>
                                 <behaviors:EventTrigger EventName="PreviewMouseDown">
-                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToNoteCommand}" />
+                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToLabWorksCommand}" />
                                 </behaviors:EventTrigger>
                             </behaviors:Interaction.Triggers>
                             <StackPanel Orientation="Horizontal">

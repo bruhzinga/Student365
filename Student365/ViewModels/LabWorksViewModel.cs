@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Converters;
 using Student365.Commands.LabWorksCommands;
 using Student365.Models;
 using Student365.Models.Repositories;
@@ -21,6 +22,7 @@ namespace Student365.ViewModels
             set
             {
                 _labWorks = value;
+
                 OnPropertyChanged("LabWorks");
             }
         }

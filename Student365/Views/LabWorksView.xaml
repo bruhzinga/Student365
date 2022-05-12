@@ -16,13 +16,13 @@
                 <DataGridTemplateColumn Header="Progress" Width="4*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar Value="{Binding Completion}" Background="Red" Foreground="Aqua" />
+                            <ProgressBar Value="{Binding Completion,Mode=TwoWay}" Background="Red" Foreground="Aqua" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Width="*" Header="Current" Binding="{Binding Current_amount_of_Labs }" />
-                <DataGridTextColumn Width="*" Header="Max" Binding="{Binding Max_amount_of_Labs}" />
+                <DataGridTextColumn Width="*" Header="Current" Binding="{Binding Current_amount_of_Labs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged }" />
+                <DataGridTextColumn Width="*" Header="Max" Binding="{Binding Max_amount_of_Labs,Mode=TwoWay}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Student365.Models;
 using Student365.Models.Repositories;
 using Student365.ViewModels;
 
@@ -30,7 +32,8 @@ namespace Student365.Commands.LabWorksCommands
         {
             _labWorksViewModel.SelectedItem.Current_amount_of_Labs--;
             UnitOfWork.LabWorksRepository.Update();
-            _labWorksViewModel.LabWorks = UnitOfWork.LabWorksRepository.GetAllLabWorks();
+            var temp = new ObservableCollection<LabWork>(_labWorksViewModel.LabWorks);
+            _labWorksViewModel.LabWorks = temp;
         }
 
         public override bool CanExecute(object parameter)
