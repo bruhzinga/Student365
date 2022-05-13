@@ -4,20 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="abba350ae7bb46bd92bdfac8c44c220b" Name="Diagram1">
+      <Diagram DiagramId="3b0e2d26acf84fffb6e8172a63d94c07" Name="Diagram1">
         <EntityTypeShape EntityType="Student365Model.Group" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.GroupSubject" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.LabWork" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Note" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Schedule" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Student" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Subject" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Subject" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Teacher" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.User" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Grade" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
         <AssociationConnector Association="Student365Model.FK__Groups__Student___49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__Groups__Teacher___4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Student365Model.FK__GroupSubj__Subje__0C85DE4D" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__LabWorks__Subjec__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__LabWorks__Userna__02FC7413" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__Notes__Username__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Student365Model.FK__Schedule__Subjec__17036CC0" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__Students__UserNa__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__Grades__Subject__06CD04F7" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.Teachers_username" ManuallyRouted="false" />

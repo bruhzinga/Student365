@@ -16,7 +16,7 @@
                 <DataGridTemplateColumn Header="Progress" Width="4*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar Value="{Binding Completion,Mode=TwoWay}" Background="Red" Foreground="Aqua" />
+                            <ProgressBar Value="{Binding Completion,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Background="Red" Foreground="Aqua" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

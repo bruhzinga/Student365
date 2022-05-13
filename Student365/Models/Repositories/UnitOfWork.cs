@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Student365.Models.Repositories
 
         public static LabWorksRepository LabWorksRepository { get; set; } = new LabWorksRepository();
 
+        public static SchedulesRepository ScheduleRepository { get; set; } = new SchedulesRepository();
         public static User CurrentsUser { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Student365.ViewModels
 
         public ObservableCollection<LabWork> LabWorks
         {
-            get { return _labWorks; }
+            get => _labWorks;
             set
             {
                 _labWorks = value;
@@ -36,6 +36,7 @@ namespace Student365.ViewModels
             {
                 _SelectedItem = value;
                 OnPropertyChanged("SelectedItem");
+                UnitOfWork.LabWorksRepository.Update();
             }
         }
 

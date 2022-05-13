@@ -4,13 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
+             xmlns:vms="clr-namespace:Student365.ViewModels"
              mc:Ignorable="d"
+             xmlns:uc="clr-namespace:Student365.UserControls"
+
              d:DesignHeight="1000" d:DesignWidth="1000">
-    <Grid Background="DarkBlue">
-        <StackPanel>
-            <TextBlock FontSize="50"> TEXT</TextBlock>
-            <TextBlock FontSize="50" Foreground="Black">TESTSTSSS</TextBlock>
-            <Button></Button>
-        </StackPanel>
+    <UserControl.Resources>
+        <vms:ScheduleViewModel x:Key="ScheduleViewModel" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid ShowGridLines="False" Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <uc:ScheduleDataGrid Text="Понедельник">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="FirstSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+            <uc:ScheduleDataGrid Text="Вторник" Grid.Column="1">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="SecondSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+            <uc:ScheduleDataGrid Text="Среда" Grid.Column="3">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="ThirdSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+        </Grid>
+        <Grid Grid.Row="1" ShowGridLines="False" Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*">
+                </ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <uc:ScheduleDataGrid Text="Четверг" Grid.Column="0">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="FourthSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+            <uc:ScheduleDataGrid Text="Пятница" Grid.Column="1">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="FifthSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+            <uc:ScheduleDataGrid Text="Суббота" Grid.Column="2">
+                <uc:ScheduleDataGrid.Schedule>
+                    <Binding Path="SixthhSchedule"   Source="{StaticResource ScheduleViewModel}" />
+                </uc:ScheduleDataGrid.Schedule>
+            </uc:ScheduleDataGrid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -190,6 +190,9 @@
     <Compile Include="Models\Group.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupSubject.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LabWork.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -214,9 +217,13 @@
     <Compile Include="Models\Repositories\IGenericRepository.cs" />
     <Compile Include="Models\Repositories\LabWorksRepository.cs" />
     <Compile Include="Models\Repositories\NoteRepository.cs" />
+    <Compile Include="Models\Repositories\SchedulesRepository.cs" />
     <Compile Include="Models\Repositories\StudentsRepository.cs" />
     <Compile Include="Models\Repositories\UnitOfWork.cs" />
     <Compile Include="Models\Repositories\UsersRepository.cs" />
+    <Compile Include="Models\Schedule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -230,6 +237,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="UserControls\ScheduleDataGrid.xaml.cs">
+      <DependentUpon>ScheduleDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\LabWorksViewModel.cs" />
@@ -262,6 +272,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ScheduleDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GradeView.xaml" />
     <Page Include="Views\GroupView.xaml" />
     <Page Include="Views\LabWorksView.xaml">

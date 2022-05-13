@@ -61,5 +61,11 @@ namespace Student365.Models.Repositories
             return _dbSet.Where(x => x.UserName == UnitOfWork.CurrentsUser.UserName).Select(x => x.Group)
                 .FirstOrDefault();
         }
+
+        public int GetCurrentUserSubGroup()
+        {
+            return _dbSet.Where(x => x.UserName == UnitOfWork.CurrentsUser.UserName).Select(x => x.SubGroup)
+                .FirstOrDefault();
+        }
     }
 }

@@ -25,6 +25,14 @@
           <Property Name="Student id" Type="int" />
           <Property Name="Teacher id" Type="int" />
         </EntityType>
+        <EntityType Name="GroupSubjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group" Type="smallint" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="LabWorks">
           <Key>
             <PropertyRef Name="Id" />
@@ -44,6 +52,20 @@
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Header" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Group" Type="smallint" Nullable="false" />
+          <Property Name="SubGroup" Type="smallint" Nullable="false" />
+          <Property Name="Week Num" Type="tinyint" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject Num" Type="tinyint" Nullable="false" />
+          <Property Name="Subject Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Auditorium" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Day" Type="tinyint" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -126,6 +148,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__GroupSubj__Subje__0C85DE4D">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="GroupSubjects" Type="Self.GroupSubjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GroupSubjects">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LabWorks__Subjec__02084FDA">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
           <End Role="LabWorks" Type="Self.LabWorks" Multiplicity="*" />
@@ -162,6 +196,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Schedule__Subjec__17036CC0">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Students__UserNa__59FA5E80">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
@@ -188,8 +234,10 @@
         </Association>
         <EntityContainer Name="Хранилище Student365ModelContainer">
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWorks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
@@ -217,6 +265,10 @@
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
+          <AssociationSet Name="FK__GroupSubj__Subje__0C85DE4D" Association="Self.FK__GroupSubj__Subje__0C85DE4D">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="GroupSubjects" EntitySet="GroupSubjects" />
+          </AssociationSet>
           <AssociationSet Name="FK__LabWorks__Subjec__02084FDA" Association="Self.FK__LabWorks__Subjec__02084FDA">
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="LabWorks" EntitySet="LabWorks" />
@@ -228,6 +280,10 @@
           <AssociationSet Name="FK__Notes__Username__4CA06362" Association="Self.FK__Notes__Username__4CA06362">
             <End Role="Users" EntitySet="Users" />
             <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__Subjec__17036CC0" Association="Self.FK__Schedule__Subjec__17036CC0">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK__Students__UserNa__59FA5E80" Association="Self.FK__Students__UserNa__59FA5E80">
             <End Role="Users" EntitySet="Users" />
@@ -253,6 +309,15 @@
           <NavigationProperty Name="Student" Relationship="Self.FK__Groups__Student___49C3F6B7" FromRole="Groups" ToRole="Students" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__Groups__Teacher___4AB81AF0" FromRole="Groups" ToRole="Teachers" />
         </EntityType>
+        <EntityType Name="GroupSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group" Type="Int16" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
+        </EntityType>
         <EntityType Name="LabWork">
           <Key>
             <PropertyRef Name="Id" />
@@ -276,6 +341,21 @@
           <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="User" Relationship="Self.FK__Notes__Username__4CA06362" FromRole="Notes" ToRole="Users" />
         </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Group" Type="Int16" Nullable="false" />
+          <Property Name="SubGroup" Type="Int16" Nullable="false" />
+          <Property Name="Week_Num" Type="Byte" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject_Num" Type="Byte" Nullable="false" />
+          <Property Name="Subject_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Auditorium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Day" Type="Byte" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Schedule" ToRole="Subjects" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
@@ -294,7 +374,9 @@
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupSubjects" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="Subjects" ToRole="GroupSubjects" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="Subjects" ToRole="LabWorks" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Subjects" ToRole="Schedule" />
           <NavigationProperty Name="Grades" Relationship="Self.FK__Grades__Subject__06CD04F7" FromRole="Subjects" ToRole="Grades" />
         </EntityType>
         <EntityType Name="Teacher">
@@ -356,6 +438,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__GroupSubj__Subje__0C85DE4D">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="GroupSubjects" Type="Self.GroupSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GroupSubjects">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LabWorks__Subjec__02084FDA">
           <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
           <End Role="LabWorks" Type="Self.LabWork" Multiplicity="*" />
@@ -389,6 +483,18 @@
             </Principal>
             <Dependent Role="Notes">
               <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__Subjec__17036CC0">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Subject" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -442,8 +548,10 @@
         </Association>
         <EntityContainer Name="Student365Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubject" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWork" />
           <EntitySet Name="Notes" EntityType="Self.Note" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
@@ -457,6 +565,10 @@
             <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
+          <AssociationSet Name="FK__GroupSubj__Subje__0C85DE4D" Association="Self.FK__GroupSubj__Subje__0C85DE4D">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="GroupSubjects" EntitySet="GroupSubjects" />
+          </AssociationSet>
           <AssociationSet Name="FK__LabWorks__Subjec__02084FDA" Association="Self.FK__LabWorks__Subjec__02084FDA">
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="LabWorks" EntitySet="LabWorks" />
@@ -468,6 +580,10 @@
           <AssociationSet Name="FK__Notes__Username__4CA06362" Association="Self.FK__Notes__Username__4CA06362">
             <End Role="Users" EntitySet="Users" />
             <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__Subjec__17036CC0" Association="Self.FK__Schedule__Subjec__17036CC0">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
           <AssociationSet Name="FK__Students__UserNa__59FA5E80" Association="Self.FK__Students__UserNa__59FA5E80">
             <End Role="Users" EntitySet="Users" />
@@ -501,6 +617,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GroupSubjects">
+            <EntityTypeMapping TypeName="Student365Model.GroupSubject">
+              <MappingFragment StoreEntitySet="GroupSubjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LabWorks">
             <EntityTypeMapping TypeName="Student365Model.LabWork">
               <MappingFragment StoreEntitySet="LabWorks">
@@ -519,6 +644,21 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="Student365Model.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
+                <ScalarProperty Name="Week_Num" ColumnName="Week Num" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Subject_Num" ColumnName="Subject Num" />
+                <ScalarProperty Name="Subject_Type" ColumnName="Subject Type" />
+                <ScalarProperty Name="Auditorium" ColumnName="Auditorium" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
