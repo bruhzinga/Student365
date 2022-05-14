@@ -18,13 +18,13 @@ namespace Student365.Models.Repositories
             _dbSet = _context.Set<Schedule>();
         }
 
-        public ObservableCollection<Schedule> GetByDay(int i)
+        public ObservableCollection<Schedule> GetByDayAndWeek(int day, int week)
         {
             var group = UnitOfWork.StudentsRepository.GetCurrentUserGroup();
             var subGroup = UnitOfWork.StudentsRepository.GetCurrentUserSubGroup();
 
             return new ObservableCollection<Schedule>(_dbSet.Where(x =>
-                x.Day == i && x.Group == group &&
+                x.Day == day && x.Week_Num == week && x.Group == group &&
                 x.SubGroup == subGroup));
         }
     }

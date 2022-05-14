@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Student365"
         xmlns:views="clr-namespace:Student365.Views"
         xmlns:vms="clr-namespace:Student365.ViewModels"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="760" Width="910" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" Foreground="{x:Null}" ResizeMode="CanResize" AllowsTransparency="False"
@@ -68,7 +68,11 @@
                 <ContentControl  x:Name="View" Content="{Binding CurrentViewModel}" Grid.RowSpan="2" />
             </Grid>
             <Grid x:Name="GridMenu" Width="67">
-                <StackPanel x:Name="stackPanel"  Style="{DynamicResource Menu}" Background="LightBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="47*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="stackPanel"  Style="{DynamicResource Menu}" Background="LightBlue" Grid.ColumnSpan="2">
                     <Grid Height="48" Style="{DynamicResource Grid1}">
                         <Button x:Name="ButtonCloseMenu" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
                             <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="ArrowLeft" Width="30" Height="30" />
@@ -77,57 +81,16 @@
                             <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Menu" VerticalAlignment="Center" Margin="-20"  Width="27" Height="27" />
                         </Button>
                     </Grid>
-                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Selected}" ItemsSource="{Binding NavigationItems}">
 
-                        <ListViewItem x:Name="Task_List" Height="70">
-                            <behaviors:Interaction.Triggers>
-                                <behaviors:EventTrigger EventName="PreviewMouseDown">
-                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToGroupViewCommand}" />
-                                </behaviors:EventTrigger>
-                            </behaviors:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="RadioButtonUnchecked" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
-                                <TextBlock Text="Tasks" Style="{DynamicResource Text}"  VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="Progress" Height="70">
-                            <behaviors:Interaction.Triggers>
-                                <behaviors:EventTrigger EventName="PreviewMouseDown">
-                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToNoteCommand}" />
-                                </behaviors:EventTrigger>
-                            </behaviors:Interaction.Triggers>
-
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="StarHalf" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
-                                <TextBlock Text="Progress" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Height="70" x:Name="TimeTable_List">
-                            <behaviors:Interaction.Triggers>
-                                <behaviors:EventTrigger EventName="PreviewMouseDown">
-                                    <behaviors:InvokeCommandAction Command="{Binding NavigateToLabWorksCommand}" />
-                                </behaviors:EventTrigger>
-                            </behaviors:Interaction.Triggers>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="EventNote" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
-                                <TextBlock Text="Timetable" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem Height="70" x:Name="Message_List">
-                            <StackPanel Height="60" Orientation="Horizontal">
-                                <materialDesign:Badged  Height="50" Margin="0 10 0 0" x:Name="Count_Message">
-                                    <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="Email" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
-                                </materialDesign:Badged>
-                                <TextBlock Text="Messages" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="Group_list" Height="70" Visibility="Hidden">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Style="{DynamicResource Icon}" Kind="People" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
-                                <TextBlock Text="Group list" Style="{DynamicResource Text}" VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Height="70" Orientation="Horizontal">
+                                    <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="{Binding Kind}" Width="27" Height="27" Margin="8" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Text}" Style="{DynamicResource Text}"  VerticalAlignment="Center" Margin="20 10" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
             </Grid>

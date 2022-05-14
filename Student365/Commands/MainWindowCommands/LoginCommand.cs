@@ -31,7 +31,7 @@ namespace Student365.Commands
 
             var users = UnitOfWork.UsersRepository;
 
-            var user = users.GetUser("Admin", "Admin");
+            var user = users.GetUser(_viewModel.Username, _viewModel.Password);
             if (user == null)
             {
                 MessageBox.Show("Wrong Password or Login");

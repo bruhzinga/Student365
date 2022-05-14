@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -33,12 +34,21 @@ namespace Student365.UserControls
 
         public static readonly DependencyProperty ScheduleProperty = DependencyProperty.Register(
             "Schedule", typeof(ObservableCollection<Schedule>), typeof(ScheduleDataGrid),
-            new PropertyMetadata(default(ObservableCollection<Schedule>)));
+            new UIPropertyMetadata(default(ObservableCollection<Schedule>), OnChange));
+
+        private static void OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as ScheduleDataGrid;
+            control.THEGRID.ItemsSource = (IEnumerable)e.NewValue;
+        }
 
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            set
+            {
+                SetValue(TextProperty, value);
+            }
         }
 
         public ObservableCollection<Schedule> Schedule

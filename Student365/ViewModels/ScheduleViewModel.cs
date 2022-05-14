@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using MahApps.Metro.IconPacks;
+
 using Student365.Models;
 using Student365.Models.Repositories;
 
@@ -11,86 +14,160 @@ namespace Student365.ViewModels
 {
     public class ScheduleViewModel : BaseViewModel
     {
-        private ObservableCollection<Schedule> _firstSchedule;
+        private ObservableCollection<Schedule> _schedule1_1;
 
-        public ObservableCollection<Schedule> FirstSchedule
+        public ObservableCollection<Schedule> Schedule1_1
         {
-            get => _firstSchedule;
+            get => _schedule1_1;
             set
             {
-                _firstSchedule = value;
-                OnPropertyChanged(nameof(FirstSchedule));
+                _schedule1_1 = value;
+                OnPropertyChanged("Schedule1_1");
             }
         }
 
-        private ObservableCollection<Schedule> _secondSchedule;
+        private ObservableCollection<Schedule> _schedule1_2;
 
-        public ObservableCollection<Schedule> SecondSchedule
+        public ObservableCollection<Schedule> Schedule1_2
         {
-            get => _secondSchedule;
+            get => _schedule1_2;
             set
             {
-                _firstSchedule = value;
-                OnPropertyChanged(nameof(SecondSchedule));
+                _schedule1_2 = value;
+                OnPropertyChanged("Schedule1_2");
             }
         }
 
-        private ObservableCollection<Schedule> _thirdSchedule;
+        private ObservableCollection<Schedule> _schedule2_1;
 
-        public ObservableCollection<Schedule> ThirdSchedule
+        public ObservableCollection<Schedule> Schedule2_1
         {
-            get => _thirdSchedule;
+            get => _schedule2_1;
             set
             {
-                _thirdSchedule = value;
-                OnPropertyChanged(nameof(ThirdSchedule));
+                _schedule2_1 = value;
+                OnPropertyChanged("Schedule2_1");
             }
         }
 
-        private ObservableCollection<Schedule> _fourhShedule;
+        private ObservableCollection<Schedule> _schedule2_2;
 
-        public ObservableCollection<Schedule> FourthSchedule
+        public ObservableCollection<Schedule> Schedule2_2
         {
-            get => _fourhShedule;
+            get => _schedule2_2;
             set
             {
-                _thirdSchedule = value;
-                OnPropertyChanged(nameof(FourthSchedule));
+                _schedule2_2 = value;
+                OnPropertyChanged("Schedule2_2");
             }
         }
 
-        private ObservableCollection<Schedule> _fifthShedule;
+        private ObservableCollection<Schedule> _schedule3_1;
 
-        public ObservableCollection<Schedule> FifthSchedule
+        public ObservableCollection<Schedule> Schedule3_1
         {
-            get => _fourhShedule;
+            get => _schedule3_1;
             set
             {
-                _thirdSchedule = value;
-                OnPropertyChanged(nameof(FifthSchedule));
+                _schedule3_1 = value;
+                OnPropertyChanged("Schedule3_1");
             }
         }
 
-        private ObservableCollection<Schedule> _SixthShedule;
+        private ObservableCollection<Schedule> _schedule3_2;
 
-        public ObservableCollection<Schedule> SixthhSchedule
+        public ObservableCollection<Schedule> Schedule3_2
         {
-            get => _SixthShedule;
+            get => _schedule3_2;
             set
             {
-                _thirdSchedule = value;
-                OnPropertyChanged(nameof(SixthhSchedule));
+                _schedule3_2 = value;
+                OnPropertyChanged("Schedule3_2");
+            }
+        }
+
+        private ObservableCollection<Schedule> _schedule4_1;
+
+        public ObservableCollection<Schedule> Schedule4_1
+        {
+            get => _schedule4_1;
+            set
+            {
+                _schedule4_1 = value;
+                OnPropertyChanged("Schedule4_1");
+            }
+        }
+
+        private ObservableCollection<Schedule> _schedul4_2;
+        public ObservableCollection<Schedule> Schedule4_2 { get; set; }
+
+        private ObservableCollection<Schedule> _schedule5_1;
+
+        public ObservableCollection<Schedule> Schedule5_1
+        {
+            get => _schedule5_1;
+            set
+            {
+                _schedule5_1 = value;
+                OnPropertyChanged("Schedule5_1");
+            }
+        }
+
+        private ObservableCollection<Schedule> _schedule5_2;
+
+        public ObservableCollection<Schedule> Schedule5_2
+        {
+            get => _schedule5_2;
+            set
+            {
+                _schedule5_2 = value;
+                OnPropertyChanged("Schedule5_2");
+            }
+        }
+
+        private ObservableCollection<Schedule> _schedule6_1;
+
+        public ObservableCollection<Schedule> Schedule6_1
+        {
+            get => _schedule6_1;
+            set
+            {
+                _schedule6_1 = value;
+                OnPropertyChanged("Schedule6_1");
+            }
+        }
+
+        private ObservableCollection<Schedule> _schedule6_2;
+
+        public ObservableCollection<Schedule> Schedule6_2
+        {
+            get => _schedule6_2;
+            set
+            {
+                _schedule6_2 = value;
+                OnPropertyChanged("Schedule6_2");
             }
         }
 
         public ScheduleViewModel()
         {
-            _firstSchedule = UnitOfWork.ScheduleRepository.GetByDay(1);
-            _secondSchedule = UnitOfWork.ScheduleRepository.GetByDay(2);
-            _thirdSchedule = UnitOfWork.ScheduleRepository.GetByDay(3);
-            _fourhShedule = UnitOfWork.ScheduleRepository.GetByDay(4);
-            _fifthShedule = UnitOfWork.ScheduleRepository.GetByDay(5);
-            _SixthShedule = UnitOfWork.ScheduleRepository.GetByDay(6);
+            SetAll();
+        }
+
+        public void SetAll()
+        {
+            _schedule1_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(1, 1);
+            _schedule1_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(1, 2);
+            _schedule2_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(2, 1);
+            _schedule2_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(2, 2);
+            _schedule3_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(3, 1);
+            _schedule3_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(3, 2);
+            _schedule4_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(4, 1);
+            _schedul4_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(4, 2);
+            _schedule5_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(5, 1);
+            _schedule5_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(5, 2);
+            _schedule6_1 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(6, 1);
+            _schedule6_2 = UnitOfWork.ScheduleRepository.GetByDayAndWeek(6, 2);
         }
     }
 }

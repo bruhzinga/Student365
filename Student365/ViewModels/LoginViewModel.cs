@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,12 @@ namespace Student365.ViewModels
 
         public string Username
         {
-            get => _username;
+            get
+            {
+                if (_username == null)
+                    return "Admin";
+                return _username;
+            }
             set
             {
                 _username = value;
@@ -30,7 +36,17 @@ namespace Student365.ViewModels
 
         public string Password
         {
-            get => _password;
+            get
+            {
+                if (_password == null)
+                {
+                    return "Admin";
+                }
+                else
+                {
+                    return _password;
+                }
+            }
             set
             {
                 _password = value;
