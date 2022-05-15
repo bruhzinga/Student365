@@ -42,10 +42,8 @@ namespace Student365.ViewModels
                 {
                     return "Admin";
                 }
-                else
-                {
-                    return _password;
-                }
+
+                return _password;
             }
             set
             {

@@ -25,6 +25,7 @@ namespace Student365.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Absence> Absences { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupSubject> GroupSubjects { get; set; }
         public virtual DbSet<LabWork> LabWorks { get; set; }

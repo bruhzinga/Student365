@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Reason" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Student365.dbo.Grades" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="Grades">
@@ -62,8 +72,8 @@
           <Property Name="Week Num" Type="tinyint" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
           <Property Name="Subject Num" Type="tinyint" Nullable="false" />
-          <Property Name="Subject Type" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Auditorium" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Auditorium" Type="nvarchar" MaxLength="50" />
           <Property Name="Day" Type="tinyint" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -100,6 +110,30 @@
           <Property Name="Role" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Absence__Subject__245D67DE">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absence__Usernam__236943A5">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Grades__Subject__06CD04F7">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
@@ -233,6 +267,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище Student365ModelContainer">
+          <EntitySet Name="Absence" EntityType="Self.Absence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWorks" Schema="dbo" store:Type="Tables" />
@@ -249,6 +284,14 @@
     [Grades].[Subject] AS [Subject]
     FROM [dbo].[Grades] AS [Grades]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Absence__Subject__245D67DE" Association="Self.FK__Absence__Subject__245D67DE">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absence__Usernam__236943A5" Association="Self.FK__Absence__Usernam__236943A5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
           <AssociationSet Name="FK__Grades__Subject__06CD04F7" Association="Self.FK__Grades__Subject__06CD04F7">
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="Grades" EntitySet="Grades" />
@@ -299,6 +342,18 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Student365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Absence__Subject__245D67DE" FromRole="Absence" ToRole="Subjects" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Absence__Usernam__236943A5" FromRole="Absence" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -350,8 +405,8 @@
           <Property Name="Week_Num" Type="Byte" Nullable="false" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject_Num" Type="Byte" Nullable="false" />
-          <Property Name="Subject_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Auditorium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subject_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Auditorium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Day" Type="Byte" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Subject1" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Schedule" ToRole="Subjects" />
@@ -374,6 +429,7 @@
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Subject__245D67DE" FromRole="Subjects" ToRole="Absence" />
           <NavigationProperty Name="GroupSubjects" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="Subjects" ToRole="GroupSubjects" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="Subjects" ToRole="LabWorks" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Subjects" ToRole="Schedule" />
@@ -396,6 +452,7 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Usernam__236943A5" FromRole="Users" ToRole="Absence" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Userna__02FC7413" FromRole="Users" ToRole="LabWorks" />
           <NavigationProperty Name="Notes" Relationship="Self.FK__Notes__Username__4CA06362" FromRole="Users" ToRole="Notes" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Students__UserNa__59FA5E80" FromRole="Users" ToRole="Students" />
@@ -414,6 +471,30 @@
           <NavigationProperty Name="Subject1" Relationship="Self.FK__Grades__Subject__06CD04F7" FromRole="Grades" ToRole="Subjects" />
           <NavigationProperty Name="User" Relationship="Self.FK__Grades__Username__05D8E0BE" FromRole="Grades" ToRole="Users" />
         </EntityType>
+        <Association Name="FK__Absence__Subject__245D67DE">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absence__Usernam__236943A5">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Groups__Student___49C3F6B7">
           <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Groups" Type="Self.Group" Multiplicity="*" />
@@ -547,6 +628,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Student365Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Absences" EntityType="Self.Absence" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubject" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWork" />
@@ -557,6 +639,14 @@
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <AssociationSet Name="FK__Absence__Subject__245D67DE" Association="Self.FK__Absence__Subject__245D67DE">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absence__Usernam__236943A5" Association="Self.FK__Absence__Usernam__236943A5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
           <AssociationSet Name="FK__Groups__Student___49C3F6B7" Association="Self.FK__Groups__Student___49C3F6B7">
             <End Role="Students" EntitySet="Students" />
             <End Role="Groups" EntitySet="Groups" />
@@ -608,6 +698,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище Student365ModelContainer" CdmEntityContainer="Student365Entities">
+          <EntitySetMapping Name="Absences">
+            <EntityTypeMapping TypeName="Student365Model.Absence">
+              <MappingFragment StoreEntitySet="Absence">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Groups">
             <EntityTypeMapping TypeName="Student365Model.Group">
               <MappingFragment StoreEntitySet="Groups">

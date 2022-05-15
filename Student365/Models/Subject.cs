@@ -17,6 +17,7 @@ namespace Student365.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subject()
         {
+            this.Absences = new HashSet<Absence>();
             this.GroupSubjects = new HashSet<GroupSubject>();
             this.LabWorks = new HashSet<LabWork>();
             this.Schedules = new HashSet<Schedule>();
@@ -25,6 +26,8 @@ namespace Student365.Models
     
         public string Name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence> Absences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupSubject> GroupSubjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

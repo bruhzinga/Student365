@@ -20,6 +20,11 @@ namespace Student365.Models.Repositories
         public static LabWorksRepository LabWorksRepository { get; set; } = new LabWorksRepository();
 
         public static SchedulesRepository ScheduleRepository { get; set; } = new SchedulesRepository();
+
+        public static GroupSubjectsRepository GroupSubjectsRepository { get; set; } = new GroupSubjectsRepository();
+
+        public static AbsenceRepository AbsenceRepository { get; set; } = new AbsenceRepository();
+
         public static User CurrentsUser { get; set; }
     }
 }

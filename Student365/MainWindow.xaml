@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="760" Width="910" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" Foreground="{x:Null}" ResizeMode="CanResize" AllowsTransparency="False"
-        Icon="E:\source\4 SEM\OOP-KURS\Student365\Student365\Resources\MyLogo.ico">
+        Icon="Resources/MyLogo.ico">
     <Window.Resources>
 
         <Storyboard x:Key="OpenMenu">
@@ -48,6 +48,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:LabWorksViewModel}">
                 <views:LabWorksView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AbsenceViewModel}">
+                <views:AbsenceWiew />
             </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -104,7 +107,9 @@
                     <materialDesign:PackIcon Kind="PowerSleep" />
                 </materialDesign:ToggleButtonAssist.OnContent>
             </ToggleButton>
-            <materialDesign:PackIcon x:Name="Exit"   HorizontalAlignment="Right" Kind="ExitToApp" Width="30" VerticalAlignment="Center" Height="30" Style="{DynamicResource Icon}"></materialDesign:PackIcon>
+            <StackPanel HorizontalAlignment="Right">
+                <materialDesign:PackIcon Kind="{Binding CurrentRole}" Foreground="Black" Height="30" Width="30" ></materialDesign:PackIcon>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

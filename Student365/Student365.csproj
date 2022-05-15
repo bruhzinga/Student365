@@ -176,12 +176,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AbsenceCommands\AddAbsenceCommand.cs" />
     <Compile Include="Commands\LabWorksCommands\MinusCommand.cs" />
     <Compile Include="Commands\LabWorksCommands\PlusCommand.cs" />
     <Compile Include="Commands\NoteCommands\AddNoteCommand.cs" />
     <Compile Include="Commands\NoteCommands\DeleteNoteCommand.cs" />
     <Compile Include="Commands\NoteCommands\SubmitNoteCommand.cs" />
     <Compile Include="LoginWindow.xaml.cs" />
+    <Compile Include="Models\Absence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataBaseContext.cs" />
     <Compile Include="Models\Grade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -213,6 +217,8 @@
     <Compile Include="Models\Note.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\AbsenceRepository.cs" />
+    <Compile Include="Models\Repositories\GroupSubjectsRepository.cs" />
     <Compile Include="Models\Repositories\IGenericRepository.cs" />
     <Compile Include="Models\Repositories\LabWorksRepository.cs" />
     <Compile Include="Models\Repositories\NoteRepository.cs" />
@@ -240,6 +246,7 @@
     <Compile Include="UserControls\ScheduleDataGrid.xaml.cs">
       <DependentUpon>ScheduleDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AbsenceViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\LabWorksViewModel.cs" />
@@ -247,6 +254,9 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="Views\AbsenceView.xaml.cs">
+      <DependentUpon>AbsenceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GradeView.xaml.cs" />
     <Compile Include="Views\GroupView.xaml.cs" />
     <Compile Include="Views\LabWorksView.xaml.cs">
@@ -273,6 +283,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\ScheduleDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AbsenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,6 +329,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Logo.png" />
+    <Resource Include="Resources\MyLogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\ScheduleViewCommands\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -325,11 +346,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Resources\Logo.png" />
-    <Content Include="Resources\MyLogo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\ScheduleViewCommands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.6.0-ci172\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.6.0-ci172\build\MaterialDesignThemes.targets')" />

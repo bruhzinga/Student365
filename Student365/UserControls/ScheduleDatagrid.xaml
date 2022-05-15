@@ -9,7 +9,7 @@
 
     <StackPanel>
         <TextBlock Text ="{Binding Text}" Foreground="Black"></TextBlock>
-        <DataGrid Grid.Column="0" ItemsSource="{Binding Schedule,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="THEGRID">
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Schedule,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"  x:Name="THEGRID">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>

@@ -26,6 +26,7 @@ namespace Student365.ViewModels
             NavigateToGroupViewCommand = new NavigateCommand(_navigationStore, new GroupViewModel());
             NavigateToNoteCommand = new NavigateCommand(_navigationStore, new NoteViewModel());
             NavigateToLabWorksCommand = new NavigateCommand(_navigationStore, new LabWorksViewModel());
+            NavigateToAbsenceCommand = new NavigateCommand(_navigationStore, new AbsenceViewModel());
         }
 
         private void OnCurrentViewModelChanged()
@@ -52,20 +53,26 @@ namespace Student365.ViewModels
                         new NavItems
                         {
                             Name = "Group",
-                            Text= "Group",
+                            Text = "Group",
                             Kind = "People"
                         },
                         new NavItems
                         {
                             Name = "Note",
-                            Text= "Note",
-                            Kind="Note"
+                            Text = "Note",
+                            Kind = "Note"
                         },
                         new NavItems
                         {
                             Name = "LabWorks",
-                            Text= "LabWorks",
-                            Kind="Work"
+                            Text = "LabWorks",
+                            Kind = "Work"
+                        },
+                        new NavItems
+                        {
+                            Name = "Absence",
+                            Text = "Absence",
+                            Kind = "BlockHelper"
                         }
                     };
                 }
@@ -107,8 +114,33 @@ namespace Student365.ViewModels
                     case { Name: "LabWorks" }:
                         NavigateToLabWorksCommand.Execute(null);
                         break;
+
+                    case { Name: "Absence" }:
+                        NavigateToAbsenceCommand.Execute(null);
+                        break;
                 }
                 OnPropertyChanged(nameof(Selected));
+            }
+        }
+
+        public string CurrentRole
+        {
+            get
+            {
+                switch (UnitOfWork.CurrentsUser.Role)
+                {
+                    case "Admin":
+                        return "Administrator";
+
+                    case "Teacher":
+                        return "Teacher";
+
+                    case "Student":
+                        return "AccountStudent";
+
+                    default:
+                        return "";
+                }
             }
         }
 
@@ -117,6 +149,8 @@ namespace Student365.ViewModels
         public ICommand NavigateToNoteCommand { get; }
 
         public ICommand NavigateToLabWorksCommand { get; }
+
+        public ICommand NavigateToAbsenceCommand { get; }
     }
 
     public class NavItems

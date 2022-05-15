@@ -9,7 +9,8 @@
         WindowStartupLocation="CenterScreen"
         Title="LoginWindow" Height="555" Width="300"
         WindowStyle="None" ResizeMode="NoResize" Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Icon ="Resources/MyLogo.ico">
     <Grid MouseDown="GridMove">
         <Grid>
             <Grid.RowDefinitions>
@@ -26,7 +27,7 @@
                 </Border.Background>
             </Border>
             <Grid>
-                <Image Source="E:\source\4 SEM\OOP-KURS\Student365\Student365\Resources\Logo.png"></Image>
+                <Image Source="Resources/Logo.png"></Image>
             </Grid>
             <StackPanel Grid.Row="1">
                 <StackPanel Orientation="Horizontal">
