@@ -52,11 +52,41 @@ namespace Student365.ViewModels
 
         public ICommand AddToSelected { get; }
 
+        public ICommand DeleteGroupSubject { get; }
+
+        public ICommand DeleteSubject { get; }
+
+        private string _selectedGroupSubject;
+
+        public string SelectedGroupSubject
+        {
+            get => _selectedGroupSubject;
+            set
+            {
+                _selectedGroupSubject = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Subject _selectedSubject;
+
+        public Subject SelectedSubject
+        {
+            get => _selectedSubject;
+            set
+            {
+                _selectedSubject = value;
+                OnPropertyChanged();
+            }
+        }
+
         public SubjectSetterViewModel()
         {
             _subjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjects();
             Sync = new SyncCommand(this);
             AddToSelected = new AddToSelectedCommand(this);
+            DeleteGroupSubject = new DeleteGroupSubjectCommand(this);
+            DeleteSubject = new DeleteSubjectCommand(this);
         }
     }
 }

@@ -58,6 +58,9 @@
             <DataTemplate DataType="{x:Type vms:SubjectSetterViewModel}">
                 <views:SubjectSetterView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:LabWorksSetterViewModel}">
+                <views:LabWorksSetterView />
+            </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

@@ -19,10 +19,10 @@
         <Grid>
             <StackPanel>
                 <Button Command="{Binding Sync}">Confirm</Button>
-                <DataGrid ItemsSource="{Binding Subjects}" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding Subjects}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn
-                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                             ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                             EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                             <DataGridCheckBoxColumn.Header>
@@ -42,6 +42,17 @@
                             </DataGridCheckBoxColumn.HeaderStyle>
                         </DataGridCheckBoxColumn>
                         <DataGridTextColumn Header="Subject" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteSubject,
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">
+                                        <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Minus" Margin="8" VerticalAlignment="Center" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Command="{Binding AddToSelected}">ADD TO SELECTED GROUP</Button>
@@ -59,10 +70,21 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <DataGrid ItemsSource="{Binding GroupSubjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding GroupSubjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGroupSubject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Subject" Binding="{Binding}">
                         </DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteGroupSubject,
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">
+                                        <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Minus" Margin="8" VerticalAlignment="Center" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

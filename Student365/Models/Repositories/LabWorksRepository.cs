@@ -10,7 +10,7 @@ namespace Student365.Models.Repositories
 {
     internal class LabWorksRepository
     {
-        private DbContext _context = new DataBaseContext();
+        private DbContext _context = new Student365Entities();
         private DbSet<LabWork> _dbSet;
 
         public LabWorksRepository()

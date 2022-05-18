@@ -11,7 +11,7 @@ namespace Student365.Models.Repositories
     internal class StudentsRepository : IGenericRepository<Student>
 
     {
-        private DbContext _context = new DataBaseContext();
+        private DbContext _context = new Student365Entities();
         private DbSet<Student> _dbSet;
 
         public StudentsRepository()

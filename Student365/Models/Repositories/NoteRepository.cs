@@ -12,7 +12,7 @@ namespace Student365.Models.Repositories
 {
     internal class NoteRepository
     {
-        private DbContext _context = new DataBaseContext();
+        private DbContext _context = new Student365Entities();
         private DbSet<Note> _dbSet;
 
         public NoteRepository()

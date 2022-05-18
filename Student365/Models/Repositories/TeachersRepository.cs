@@ -7,7 +7,7 @@ namespace Student365.ViewModels
 {
     public class TeachersRepository
     {
-        private DbContext _context = new DataBaseContext();
+        private DbContext _context = new Student365Entities();
         private DbSet<Teacher> _dbSet;
 
         public TeachersRepository()

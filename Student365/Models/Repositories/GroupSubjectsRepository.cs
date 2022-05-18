@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -23,6 +24,12 @@ namespace Student365.Models.Repositories
             return new ObservableCollection<string>(_dbSet_Gr.Where(x => x.Group == groupId).Select(x => x.Subject));
         }
 
+        public void Remove(Subject selectedSubject)
+        {
+            _dbSet_Sub.Remove(selectedSubject);
+            _context.SaveChanges();
+        }
+
         public ObservableCollection<Subject> GetAllSubjects()
         {
             return new ObservableCollection<Subject>(_dbSet_Sub.ToList());
@@ -43,6 +50,12 @@ namespace Student365.Models.Repositories
             {
                 _dbSet_Gr.AddOrUpdate(new GroupSubject { Group = group, Subject = subject.Name });
             }
+            _context.SaveChanges();
+        }
+
+        public void Remove(string selected, int groupId)
+        {
+            _dbSet_Gr.Remove(_dbSet_Gr.FirstOrDefault(x => x.Subject == selected && x.Group == groupId));
             _context.SaveChanges();
         }
     }

@@ -10,7 +10,7 @@ namespace Student365.Models.Repositories
 {
     internal static class UnitOfWork
     {
-        public static DataBaseContext _bContext;
+        public static Student365Entities _bContext;
 
         public static UsersRepository UsersRepository { get; set; } = new UsersRepository();
 

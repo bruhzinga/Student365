@@ -10,7 +10,7 @@ namespace Student365.Models.Repositories
 {
     internal class SchedulesRepository
     {
-        private DbContext _context = new DataBaseContext();
+        private DbContext _context = new Student365Entities();
         private DbSet<Schedule> _dbSet;
 
         public SchedulesRepository()
