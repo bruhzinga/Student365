@@ -27,6 +27,8 @@ namespace Student365.ViewModels
             NavigateToNoteCommand = new NavigateCommand(_navigationStore, new NoteViewModel());
             NavigateToLabWorksCommand = new NavigateCommand(_navigationStore, new LabWorksViewModel());
             NavigateToAbsenceCommand = new NavigateCommand(_navigationStore, new AbsenceViewModel());
+            NavigateToUserControlCommand = new NavigateCommand(_navigationStore, new UserControlViewModel());
+            NavigateToSubjectSetterCommand = new NavigateCommand(_navigationStore, new SubjectSetterViewModel());
         }
 
         private void OnCurrentViewModelChanged()
@@ -40,50 +42,107 @@ namespace Student365.ViewModels
         {
             get
             {
-                if (UnitOfWork.CurrentsUser.Role == "Admin")
+                return UnitOfWork.CurrentsUser.Role switch
                 {
-                    return new ObservableCollection<NavItems>
-                    {
-                        new NavItems
-                        {
-                            Name = "Schedule",
-                            Kind = "Schedule",
-                            Text = "Schedule"
-                        },
-                        new NavItems
-                        {
-                            Name = "Group",
-                            Text = "Group",
-                            Kind = "People"
-                        },
-                        new NavItems
-                        {
-                            Name = "Note",
-                            Text = "Note",
-                            Kind = "Note"
-                        },
-                        new NavItems
-                        {
-                            Name = "LabWorks",
-                            Text = "LabWorks",
-                            Kind = "Work"
-                        },
-                        new NavItems
-                        {
-                            Name = "Absence",
-                            Text = "Absence",
-                            Kind = "BlockHelper"
-                        }
-                    };
-                }
-
-                return null;
+                    "Admin" => AdminCollection(),
+                    "Teacher" => TeacherCollection(),
+                    "User" => StudentCollection(),
+                    _ => null
+                };
             }
             set
             {
                 _navigationItems = value;
                 OnPropertyChanged(nameof(NavigationItems));
             }
+        }
+
+        private ObservableCollection<NavItems> StudentCollection()
+        {
+            return new ObservableCollection<NavItems>
+            {
+                new NavItems
+                {
+                    Name = "Schedule",
+                    Kind = "Schedule",
+                    Text = "Schedule"
+                },
+                new NavItems
+                {
+                    Name = "Group",
+                    Text = "Group",
+                    Kind = "People"
+                },
+                new NavItems
+                {
+                    Name = "Note",
+                    Text = "Note",
+                    Kind = "Note"
+                },
+                new NavItems
+                {
+                    Name = "LabWorks",
+                    Text = "LabWorks",
+                    Kind = "Work"
+                },
+                new NavItems
+                {
+                    Name = "Absence",
+                    Text = "Absence",
+                    Kind = "BlockHelper"
+                }
+            };
+        }
+
+        private ObservableCollection<NavItems> TeacherCollection()
+        {
+            return new ObservableCollection<NavItems>
+            {
+                new NavItems
+                {
+                    Name = "Schedule",
+                    Kind = "Schedule",
+                    Text = "Schedule"
+                },
+                new NavItems
+                {
+                    Name = "Group",
+                    Text = "Group",
+                    Kind = "People"
+                },
+
+                new NavItems
+                {
+                    Name = "LabWorksSetter",
+                    Text = "LabWorks",
+                    Kind = "Work"
+                },
+                new NavItems
+                {
+                    Name = "SubjectSetter",
+                    Text = "Subjects",
+                    Kind = "Work"
+                },
+            };
+        }
+
+        private ObservableCollection<NavItems> AdminCollection()
+        {
+            return new ObservableCollection<NavItems>
+            {
+                new NavItems
+                {
+                    Name = "Schedule",
+                    Kind = "Schedule",
+                    Text = "Schedule"
+                },
+                new NavItems()
+                {
+                    Name="UserControl",
+                    Text = "UserControl",
+                    Kind = "AccountEdit"
+                }
+            };
         }
 
         private NavItems _selected;
@@ -118,6 +177,14 @@ namespace Student365.ViewModels
                     case { Name: "Absence" }:
                         NavigateToAbsenceCommand.Execute(null);
                         break;
+
+                    case { Name: "UserControl" }:
+                        NavigateToUserControlCommand.Execute(null);
+                        break;
+
+                    case { Name: "SubjectSetter" }:
+                        NavigateToSubjectSetterCommand.Execute(null);
+                        break;
                 }
                 OnPropertyChanged(nameof(Selected));
             }
@@ -135,7 +202,7 @@ namespace Student365.ViewModels
                     case "Teacher":
                         return "Teacher";
 
-                    case "Student":
+                    case "User":
                         return "AccountStudent";
 
                     default:
@@ -151,6 +218,10 @@ namespace Student365.ViewModels
         public ICommand NavigateToLabWorksCommand { get; }
 
         public ICommand NavigateToAbsenceCommand { get; }
+
+        public ICommand NavigateToUserControlCommand { get; }
+
+        public ICommand NavigateToSubjectSetterCommand { get; }
     }
 
     public class NavItems

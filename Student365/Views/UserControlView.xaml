@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="Student365.Views.UserControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Student365.Views"
+             xmlns:vms="clr-namespace:Student365.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vms:UserControlViewModel x:Key="UserControlView" />
+        <vms:StudentControlViewModel x:Key="StudentControlView" />
+        <vms:TeacherControlView x:Key="TeacherControlView" />
+    </UserControl.Resources>
+
+    <Grid>
+        <TabControl
+            materialDesign:ColorZoneAssist.Mode="PrimaryLight">
+            <TabItem DataContext="{StaticResource UserControlView}"
+                Header="TAB 1">
+                <materialDesign:DialogHost>
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel Orientation="Vertical" MinWidth="200">
+                            <TextBox
+                        materialDesign:HintAssist.Hint="UserName">
+                                <TextBox.Text>
+                                    <Binding
+                                Path="NewUsername"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Foreground="Black"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              materialDesign:HintAssist.Hint="Some item"
+                              ItemsSource="{Binding Roles}"
+                              Width="100">
+                                <ComboBox.SelectedItem>
+                                    <Binding
+                                Path="NewRole"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                            <TextBox
+                        materialDesign:HintAssist.Hint="Password">
+                                <TextBox.Text>
+                                    <Binding
+                                Path="NewPassword"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignIconButton}">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Plus" Margin="8" VerticalAlignment="Center" Background="Green" />
+                            </Button>
+                            <Button   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="Red" Cursor="Hand">Close</Button>
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+
+                    <StackPanel Background="White">
+
+                        <DataGrid  ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Username" Binding="{Binding UserName}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                                <DataGridComboBoxColumn Header="Role"  ItemsSource="{Binding Roles,Source={StaticResource UserControlView}}" SelectedItemBinding="{Binding Role,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridComboBoxColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteCommand,
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">
+                                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Minus" Margin="8" VerticalAlignment="Center" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button   Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Foreground="Red" Cursor="Hand" />
+                    </StackPanel>
+                </materialDesign:DialogHost>
+            </TabItem>
+            <TabItem DataContext="{StaticResource StudentControlView}"
+                Header="TAB 2">
+                <materialDesign:DialogHost>
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel Orientation="Vertical" MinWidth="200">
+                            <TextBox
+                        materialDesign:HintAssist.Hint="Name">
+                                <TextBox.Text>
+                                    <Binding
+                                Path="NewName"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Foreground="Black"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              materialDesign:HintAssist.Hint="Some item"
+                              ItemsSource="{Binding Usernames}"
+                              Width="100">
+                                <ComboBox.SelectedItem>
+                                    <Binding
+                                Path="NewUsername"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                            <TextBox
+                        materialDesign:HintAssist.Hint="Group">
+                                <TextBox.Text>
+                                    <Binding
+                                Path="NewGroup"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Subgroup">
+                                <TextBox.Text>
+                                    <Binding
+                                        Path="NewSubgroup"
+                                        Mode="TwoWay"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Kurs">
+                                <TextBox.Text>
+                                    <Binding
+                                        Path="NewKurs"
+                                        Mode="TwoWay"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Phone">
+                                <TextBox.Text>
+                                    <Binding
+                                        Path="NewPhone"
+                                        Mode="TwoWay"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignIconButton}">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Plus" Margin="8" VerticalAlignment="Center" Background="Green" />
+                            </Button>
+                            <Button   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="Red" Cursor="Hand">Close</Button>
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+                    <Grid>
+                        <DataGrid  ItemsSource="{Binding Students}" AutoGenerateColumns="False" SelectedItem="{Binding Selected_Student,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
+
+                                <DataGridTextColumn Header="Group" Binding="{Binding Group}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Kurs" Binding="{Binding Kurs}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Subgroup" Binding="{Binding SubGroup}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"></DataGridTextColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteCommand,
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">
+                                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Minus" VerticalAlignment="Center" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button   Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Foreground="Red" Cursor="Hand" />
+                    </Grid>
+                </materialDesign:DialogHost>
+            </TabItem>
+            <TabItem
+                Header="TAB 3" DataContext="{StaticResource TeacherControlView}">
+                <materialDesign:DialogHost>
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel Orientation="Vertical" MinWidth="200">
+                            <TextBox
+                        materialDesign:HintAssist.Hint="Name">
+                                <TextBox.Text>
+                                    <Binding
+                                Path="NewName"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Foreground="Black"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      materialDesign:HintAssist.Hint="Some item"
+                                      ItemsSource="{Binding Usernames,Source={StaticResource StudentControlView}}"
+                                      Width="100">
+                                <ComboBox.SelectedItem>
+                                    <Binding
+                                        Path="NewUsername"
+                                        Mode="TwoWay"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignIconButton}">
+                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Plus" Margin="8" VerticalAlignment="Center" Background="Green" />
+                            </Button>
+                            <Button   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="Red" Cursor="Hand">Close</Button>
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+
+                    <StackPanel Background="White">
+
+                        <DataGrid  ItemsSource="{Binding Teachers}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Username" Binding="{Binding Name}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Username}"></DataGridTextColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteCommand,
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">
+                                                <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Minus"  VerticalAlignment="Center" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button   Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Foreground="Red" Cursor="Hand" />
+                    </StackPanel>
+                </materialDesign:DialogHost>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

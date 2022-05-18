@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Student365.Views.SubjectSetterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Student365.Views"
+             xmlns:vms="clr-namespace:Student365.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vms:SubjectSetterViewModel x:Key="SetterViewModel" />
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource SetterViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <StackPanel>
+                <Button Command="{Binding Sync}">Confirm</Button>
+                <DataGrid ItemsSource="{Binding Subjects}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn
+                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                            ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                            EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                            <DataGridCheckBoxColumn.Header>
+                                <Border
+                                    Background="Transparent">
+                                    <CheckBox />
+                                </Border>
+                            </DataGridCheckBoxColumn.Header>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style
+                                    TargetType="{x:Type DataGridColumnHeader}"
+                                    BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter
+                                        Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridTextColumn Header="Subject" Binding="{Binding Name}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Command="{Binding AddToSelected}">ADD TO SELECTED GROUP</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel>
+                <TextBox
+                    materialDesign:HintAssist.Hint="Group" Foreground="Black">
+                    <TextBox.Text>
+                        <Binding
+                            Path="Group"
+                            UpdateSourceTrigger="PropertyChanged"
+                            Mode="TwoWay">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <DataGrid ItemsSource="{Binding GroupSubjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Subject" Binding="{Binding}">
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

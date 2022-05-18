@@ -57,7 +57,10 @@ namespace Student365.ViewModels
 
         public DateTime Date
         {
-            get { return _date; }
+            get
+            {
+                return _date;
+            }
             set
             {
                 _date = value;
@@ -89,6 +92,7 @@ namespace Student365.ViewModels
             AbsenceCount = UnitOfWork.AbsenceRepository.GetCountOfAbsencesByUser();
 
             AddAbsenceCommand = new AddAbsenceCommand(this);
+            Date = DateTime.Today;
         }
     }
 }

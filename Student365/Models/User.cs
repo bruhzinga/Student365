@@ -22,7 +22,6 @@ namespace Student365.Models
             this.Notes = new HashSet<Note>();
             this.Students = new HashSet<Student>();
             this.Teachers = new HashSet<Teacher>();
-            this.Grades = new HashSet<Grade>();
         }
     
         public string UserName { get; set; }
@@ -39,7 +38,5 @@ namespace Student365.Models
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teacher> Teachers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
     }
 }

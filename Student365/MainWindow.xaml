@@ -52,6 +52,12 @@
             <DataTemplate DataType="{x:Type vms:AbsenceViewModel}">
                 <views:AbsenceWiew />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:UserControlViewModel}">
+                <views:UserControlView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:SubjectSetterViewModel}">
+                <views:SubjectSetterView />
+            </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

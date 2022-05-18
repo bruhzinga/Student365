@@ -67,5 +67,10 @@ namespace Student365.Models.Repositories
             return _dbSet.Where(x => x.UserName == UnitOfWork.CurrentsUser.UserName).Select(x => x.SubGroup)
                 .FirstOrDefault();
         }
+
+        public ObservableCollection<Student> GetAllStudents()
+        {
+            return new ObservableCollection<Student>(_dbSet.ToList());
+        }
     }
 }

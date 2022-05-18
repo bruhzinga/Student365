@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -65,6 +66,27 @@ namespace Student365.Models.Repositories
         public object GetUser(string viewModelUsername, string viewModelPassword)
         {
             return _dbSet.FirstOrDefault(x => x.UserName == viewModelUsername && x.Password == viewModelPassword);
+        }
+
+        public ObservableCollection<User> GetUsers()
+        {
+            return new ObservableCollection<User>(_dbSet.ToList());
+        }
+
+        public void AddOrUpdate(User user)
+        {
+            _dbSet.AddOrUpdate(user);
+            _context.SaveChanges();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public ObservableCollection<string> GetUsernames()
+        {
+            return new ObservableCollection<string>(_dbSet.Select(x => x.UserName).ToList());
         }
     }
 }

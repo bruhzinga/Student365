@@ -21,10 +21,10 @@ namespace Student365.Models
             this.GroupSubjects = new HashSet<GroupSubject>();
             this.LabWorks = new HashSet<LabWork>();
             this.Schedules = new HashSet<Schedule>();
-            this.Grades = new HashSet<Grade>();
         }
     
         public string Name { get; set; }
+        public Nullable<bool> IsSelected { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Absence> Absences { get; set; }
@@ -34,7 +34,5 @@ namespace Student365.Models
         public virtual ICollection<LabWork> LabWorks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace Student365.Commands.AbsenceCommands
         public override void Execute(object parameter)
         {
             UnitOfWork.AbsenceRepository.Add(_absenceViewModel.Date, _absenceViewModel.Reason, _absenceViewModel.Selected);
+            _absenceViewModel.Absences = UnitOfWork.AbsenceRepository.GetAllByCurrentUser();
+            _absenceViewModel.AbsenceCount = UnitOfWork.AbsenceRepository.GetCountOfAbsencesByUser();
         }
     }
 }

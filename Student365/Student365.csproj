@@ -161,6 +161,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -182,15 +183,15 @@
     <Compile Include="Commands\NoteCommands\AddNoteCommand.cs" />
     <Compile Include="Commands\NoteCommands\DeleteNoteCommand.cs" />
     <Compile Include="Commands\NoteCommands\SubmitNoteCommand.cs" />
+    <Compile Include="Commands\SubjectSetterCommand\AddToSelectedCommand.cs" />
+    <Compile Include="Commands\SubjectSetterCommand\SyncCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\AddStudentCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\AddUserCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\DeleteStudentCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\DeleteUserCommand.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="LoginWindow.xaml.cs" />
     <Compile Include="Models\Absence.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBaseContext.cs" />
-    <Compile Include="Models\Grade.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Group.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GroupSubject.cs">
@@ -254,6 +255,9 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="Models\Repositories\TeachersRepository.cs" />
+    <Compile Include="ViewModels\SubjectSetterViewModel.cs" />
+    <Compile Include="ViewModels\UserControlViewModel.cs" />
     <Compile Include="Views\AbsenceView.xaml.cs">
       <DependentUpon>AbsenceView.xaml</DependentUpon>
     </Compile>
@@ -264,7 +268,13 @@
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs" />
     <Compile Include="Views\ScheduleView.xaml.cs" />
+    <Compile Include="Views\SubjectSetterView.xaml.cs">
+      <DependentUpon>SubjectSetterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TeacherView.xaml.cs" />
+    <Compile Include="Views\UserControlView.xaml.cs">
+      <DependentUpon>UserControlView.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginWindow.xaml" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -298,7 +308,15 @@
     </Page>
     <Page Include="Views\NoteView.xaml" />
     <Page Include="Views\ScheduleView.xaml" />
+    <Page Include="Views\SubjectSetterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TeacherView.xaml" />
+    <Page Include="Views\UserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -4,31 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
+             xmlns:converters="clr-namespace:Student365.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <UserControl.Resources>
+        <converters:DateConverter x:Key="DateConverter"></converters:DateConverter>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition  Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical">
-            <StackPanel HorizontalAlignment="Left"   Orientation="Horizontal" VerticalAlignment="Center">
-                <ComboBox Foreground="Black"
+        <StackPanel   Orientation="Horizontal"  Grid.Row="0">
+            <ComboBox Foreground="Black"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     materialDesign:HintAssist.Hint="Some item"
                     ItemsSource="{Binding SubjectList}"
-                    Width="200"
-                          SelectedItem="{Binding Selected}" />
-                <TextBlock Text="Choose Date"  FontSize="25" VerticalAlignment="Center" Foreground="Black"></TextBlock>
-                <DatePicker Margin="20,0,0,0" Foreground="Black" Text="{Binding Date,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
-                <TextBlock Text="Write a reason" VerticalAlignment="Center" FontSize="25" Padding="10,0,0,0" Foreground="Black"></TextBlock>
-                <TextBox Text="{Binding Reason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Black"  Padding="0,0,10,0" Width="120" Cursor="Arrow"></TextBox>
-                <Button Style="{StaticResource MaterialDesignIconButton}" Foreground="Black" Background="Green" Command="{Binding AddAbsenceCommand}" Cursor="Hand">
-                    <materialDesign:PackIcon Kind="Plus"></materialDesign:PackIcon>
-                </Button>
-            </StackPanel>
-            <DataGrid ItemsSource="{Binding Absences,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-            </DataGrid>
-            <DataGrid ItemsSource="{Binding AbsenceCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-            </DataGrid>
+                    Width="200">
+                <ComboBox.SelectedItem>
+                    <Binding
+                    Path="Selected"
+                    Mode="TwoWay"
+                    UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <TextBlock Text="Choose Date"  FontSize="25" VerticalAlignment="Center" Foreground="Black"></TextBlock>
+            <DatePicker Margin="20,0,0,0" Foreground="Black" Text="{Binding Date,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            <TextBlock Text="Write a reason" VerticalAlignment="Center" FontSize="25" Padding="10,0,0,0" Foreground="Black"></TextBlock>
+            <TextBox Text="{Binding Reason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Black"  Padding="0,0,10,0" Width="120" Cursor="Arrow"></TextBox>
+            <Button Style="{StaticResource MaterialDesignIconButton}" Foreground="Black" Background="Green" Command="{Binding AddAbsenceCommand}" Cursor="Hand">
+                <materialDesign:PackIcon Kind="Plus"></materialDesign:PackIcon>
+            </Button>
         </StackPanel>
+
+        <DataGrid ItemsSource="{Binding Absences,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.Row="1" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date,Converter={StaticResource DateConverter}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding AbsenceCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Student365.ViewModels;
 
 namespace Student365.Models.Repositories
 {
@@ -24,6 +25,7 @@ namespace Student365.Models.Repositories
         public static GroupSubjectsRepository GroupSubjectsRepository { get; set; } = new GroupSubjectsRepository();
 
         public static AbsenceRepository AbsenceRepository { get; set; } = new AbsenceRepository();
+        public static TeachersRepository TeachersRepository { get; set; } = new TeachersRepository();
 
         public static User CurrentsUser { get; set; }
     }
