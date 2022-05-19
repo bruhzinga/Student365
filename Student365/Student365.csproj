@@ -274,7 +274,6 @@
     <Compile Include="Views\SubjectSetterView.xaml.cs">
       <DependentUpon>SubjectSetterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TeacherView.xaml.cs" />
     <Compile Include="Views\UserControlView.xaml.cs">
       <DependentUpon>UserControlView.xaml</DependentUpon>
     </Compile>
@@ -315,7 +314,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TeacherView.xaml" />
     <Page Include="Views\UserControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

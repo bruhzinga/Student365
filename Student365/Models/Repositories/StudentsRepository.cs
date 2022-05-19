@@ -23,6 +23,11 @@ namespace Student365.Models.Repositories
         {
             _dbSet.Add(item);
             _context.SaveChanges();
+            var groupsubj = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(item.Group);
+            foreach (var grrouSubject in groupsubj)
+            {
+                UnitOfWork.LabWorksRepository.AddLabInfo(grrouSubject);
+            }
         }
 
         public Student FindById(int id)
@@ -61,6 +66,11 @@ namespace Student365.Models.Repositories
         {
             return _dbSet.Where(x => x.UserName == UnitOfWork.CurrentsUser.UserName).Select(x => x.Group)
                 .FirstOrDefault();
+        }
+
+        public ObservableCollection<Student> GetGroup(int group)
+        {
+            return new ObservableCollection<Student>(_dbSet.Where(x => x.Group == group).ToList());
         }
 
         public int GetCurrentUserSubGroup()

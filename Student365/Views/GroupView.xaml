@@ -4,16 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid Style="{StaticResource MaterialDesignDataGrid}" ItemsSource="{Binding Students}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center"  VerticalAlignment="Stretch" FontSize="20" Padding="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Group" Binding="{Binding Group}"></DataGridTextColumn>
-                <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Kurs" Binding="{Binding Kurs}"></DataGridTextColumn>
-                <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Sub Group" Binding="{Binding SubGroup}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel>
+            <TextBox
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                Height="50"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="This is a text area"
+                Foreground="Black">
+                <TextBox.Text>
+                    <Binding Path="Group" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                </TextBox.Text>
+            </TextBox>
+            <DataGrid Style="{StaticResource MaterialDesignDataGrid}" ItemsSource="{Binding Students}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center"  VerticalAlignment="Stretch" FontSize="20" Padding="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Name" Binding="{Binding Name}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Group" Binding="{Binding Group}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Kurs" Binding="{Binding Kurs}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Sub Group" Binding="{Binding SubGroup}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Phone" Binding="{Binding Phone}" Width="2*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl>
