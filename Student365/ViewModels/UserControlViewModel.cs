@@ -116,6 +116,16 @@ namespace Student365.ViewModels
             DeleteCommand = new DeleteUserCommand(this);
             AddCommand = new AddUserCommand(this);
         }
+
+        public string vis
+        {
+            get
+            {
+                if (UnitOfWork.CurrentsUser.Role == "Admin")
+                    return "Visible";
+                return "Collapsed";
+            }
+        }
     }
 
     public class StudentControlViewModel : BaseViewModel
@@ -124,10 +134,7 @@ namespace Student365.ViewModels
 
         public ObservableCollection<Student> Students
         {
-            get
-            {
-                return _students;
-            }
+            get { return _students; }
             set
             {
                 _students = value;
@@ -137,14 +144,8 @@ namespace Student365.ViewModels
 
         public static ObservableCollection<string> Usernames
         {
-            get
-            {
-                return _usernames;
-            }
-            set
-            {
-                _usernames = value;
-            }
+            get { return _usernames; }
+            set { _usernames = value; }
         }
 
         private static ObservableCollection<string> _usernames;
@@ -153,10 +154,7 @@ namespace Student365.ViewModels
 
         public string NewName
         {
-            get
-            {
-                return _newName;
-            }
+            get { return _newName; }
             set
             {
                 _newName = value;
@@ -168,10 +166,7 @@ namespace Student365.ViewModels
 
         public string NewUsername
         {
-            get
-            {
-                return _newUsername;
-            }
+            get { return _newUsername; }
             set
             {
                 _newUsername = value;
@@ -183,10 +178,7 @@ namespace Student365.ViewModels
 
         public string NewGroup
         {
-            get
-            {
-                return _newGroup;
-            }
+            get { return _newGroup; }
             set
             {
                 _newGroup = value;
@@ -198,10 +190,7 @@ namespace Student365.ViewModels
 
         public string NewSubgroup
         {
-            get
-            {
-                return _newSubgroup;
-            }
+            get { return _newSubgroup; }
             set
             {
                 _newSubgroup = value;
@@ -214,10 +203,7 @@ namespace Student365.ViewModels
         public string NewKurs
 
         {
-            get
-            {
-                return _newKurs;
-            }
+            get { return _newKurs; }
 
             set
             {
@@ -230,10 +216,7 @@ namespace Student365.ViewModels
 
         public string NewPhone
         {
-            get
-            {
-                return _newPhone;
-            }
+            get { return _newPhone; }
 
             set
             {
@@ -246,10 +229,7 @@ namespace Student365.ViewModels
 
         public Student Selected_Student
         {
-            get
-            {
-                return _selected;
-            }
+            get { return _selected; }
             set
             {
                 _selected = value;
@@ -266,6 +246,16 @@ namespace Student365.ViewModels
             Usernames = UnitOfWork.UsersRepository.GetUsernames();
             DeleteCommand = new DeleteStudentCommand(this);
             AddCommand = new AddStudentCommand(this);
+        }
+
+        public string vis
+        {
+            get
+            {
+                if (UnitOfWork.CurrentsUser.Role == "Admin" || UnitOfWork.CurrentsUser.Role == "Teacher")
+                    return "Visible";
+                return "Collapsed";
+            }
         }
     }
 
@@ -290,6 +280,16 @@ namespace Student365.ViewModels
         public TeacherControlView()
         {
             Teachers = UnitOfWork.TeachersRepository.GetAll();
+        }
+
+        public string vis
+        {
+            get
+            {
+                if (UnitOfWork.CurrentsUser.Role == "Admin")
+                    return "Visible";
+                return "Collapsed";
+            }
         }
     }
 }

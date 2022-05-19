@@ -111,11 +111,11 @@ namespace Student365.ViewModels
                     Kind = "People"
                 },
 
-                new NavItems
+                new NavItems()
                 {
-                    Name = "LabWorksSetter",
-                    Text = "LabWorks",
-                    Kind = "Work"
+                    Name="UserControl",
+                    Text = "UserControl",
+                    Kind = "AccountEdit"
                 },
                 new NavItems
                 {
@@ -130,12 +130,6 @@ namespace Student365.ViewModels
         {
             return new ObservableCollection<NavItems>
             {
-                new NavItems
-                {
-                    Name = "Schedule",
-                    Kind = "Schedule",
-                    Text = "Schedule"
-                },
                 new NavItems()
                 {
                     Name="UserControl",

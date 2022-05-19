@@ -18,7 +18,7 @@
         <TabControl
             materialDesign:ColorZoneAssist.Mode="PrimaryLight">
             <TabItem DataContext="{StaticResource UserControlView}"
-                Header="TAB 1">
+                Header="TAB 1" Visibility="{Binding vis}">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200">
@@ -90,7 +90,7 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem DataContext="{StaticResource StudentControlView}"
-                Header="TAB 2">
+                Header="TAB 2" Visibility="{Binding vis}">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200">
@@ -193,7 +193,7 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem
-                Header="TAB 3" DataContext="{StaticResource TeacherControlView}">
+                Header="TAB 3" DataContext="{StaticResource TeacherControlView}" Visibility="{Binding vis}">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200">
