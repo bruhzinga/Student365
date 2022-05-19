@@ -19,9 +19,9 @@ namespace Student365.Models.Repositories
             _dbSet_Sub = _context.Set<Subject>();
         }
 
-        public ObservableCollection<string> GetAllSubjectsNamesByGroupId(int groupId)
+        public ObservableCollection<GroupSubject> GetAllSubjectsByGroupId(int groupId)
         {
-            return new ObservableCollection<string>(_dbSet_Gr.Where(x => x.Group == groupId).Select(x => x.Subject));
+            return new ObservableCollection<GroupSubject>(_dbSet_Gr.Where(x => x.Group == groupId));
         }
 
         public void Remove(Subject selectedSubject)
@@ -31,7 +31,15 @@ namespace Student365.Models.Repositories
         }
 
         public ObservableCollection<Subject> GetAllSubjects()
+
         {
+            var All = _dbSet_Sub.ToList();
+            foreach (var subject in All)
+            {
+                subject.IsSelected = false;
+                _dbSet_Sub.AddOrUpdate(subject);
+            }
+            _context.SaveChanges();
             return new ObservableCollection<Subject>(_dbSet_Sub.ToList());
         }
 
@@ -41,22 +49,48 @@ namespace Student365.Models.Repositories
             {
                 _dbSet_Sub.AddOrUpdate(subject);
             }
+
+            _context.SaveChanges();
+        }
+
+        public void AddOrUpdateAll(ObservableCollection<GroupSubject> subjects)
+        {
+            foreach (var subject in subjects)
+            {
+                _dbSet_Gr.AddOrUpdate(subject);
+                if (subject.Max_Labs != null)
+                {
+                    UnitOfWork.LabWorksRepository.AddLabInfo(subject);
+                }
+            }
             _context.SaveChanges();
         }
 
         public void AddToSelected(List<Subject> subjects, short group)
         {
+            var current = _dbSet_Gr.Where(x => x.Group == group).ToList();
             foreach (var subject in subjects)
             {
-                _dbSet_Gr.AddOrUpdate(new GroupSubject { Group = group, Subject = subject.Name });
+                if (!current.Any(x => x.Subject == subject.Name))
+                {
+                    _dbSet_Gr.Add(new GroupSubject() { Group = group, Subject = subject.Name });
+                }
             }
+
             _context.SaveChanges();
         }
 
-        public void Remove(string selected, int groupId)
+        public void Remove(GroupSubject selected)
         {
-            _dbSet_Gr.Remove(_dbSet_Gr.FirstOrDefault(x => x.Subject == selected && x.Group == groupId));
+            var subject = selected.Subject;
+            _dbSet_Gr.Remove(selected);
+            UnitOfWork.LabWorksRepository.RemoveLabInfo(selected, subject);
             _context.SaveChanges();
+        }
+
+        public ObservableCollection<string> GetAllSubjectsNamesByGroupId(int getCurrentUserGroup)
+        {
+            return new ObservableCollection<string>(_dbSet_Gr.Where(x => x.Group == getCurrentUserGroup).Select(x => x.Subject));
         }
     }
 }

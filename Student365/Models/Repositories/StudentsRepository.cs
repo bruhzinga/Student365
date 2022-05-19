@@ -22,6 +22,7 @@ namespace Student365.Models.Repositories
         public void Create(Student item)
         {
             _dbSet.Add(item);
+            _context.SaveChanges();
         }
 
         public Student FindById(int id)
@@ -71,6 +72,11 @@ namespace Student365.Models.Repositories
         public ObservableCollection<Student> GetAllStudents()
         {
             return new ObservableCollection<Student>(_dbSet.ToList());
+        }
+
+        public List<Student> GetAllStudentsByGroupId(int groupid)
+        {
+            return _dbSet.Where(x => x.Group == groupid).ToList();
         }
     }
 }

@@ -72,8 +72,8 @@
                 </TextBox>
                 <DataGrid ItemsSource="{Binding GroupSubjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGroupSubject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding}">
-                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" />
+                        <DataGridTextColumn Header="Max Amount of labs" Binding="{Binding Max_Labs}" />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -87,6 +87,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Command="{Binding ChangeMaxLabs}">Confirm</Button>
             </StackPanel>
         </Grid>
     </Grid>

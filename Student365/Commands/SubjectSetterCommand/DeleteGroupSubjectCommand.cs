@@ -10,7 +10,7 @@ namespace Student365.Commands.SubjectSetterCommand
 
         public override void Execute(object parameter)
         {
-            UnitOfWork.GroupSubjectsRepository.Remove(_subjectSetterViewModel.SelectedGroupSubject, Convert.ToInt32(_subjectSetterViewModel.Group));
+            UnitOfWork.GroupSubjectsRepository.Remove(_subjectSetterViewModel.SelectedGroupSubject);
             _subjectSetterViewModel.GroupSubjects.Remove(_subjectSetterViewModel.SelectedGroupSubject);
         }
 

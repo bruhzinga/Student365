@@ -21,9 +21,9 @@ namespace Student365.ViewModels
             }
         }
 
-        private ObservableCollection<string> _groupSubjects;
+        private ObservableCollection<GroupSubject> _groupSubjects;
 
-        public ObservableCollection<string> GroupSubjects
+        public ObservableCollection<GroupSubject> GroupSubjects
         {
             get => _groupSubjects;
             set
@@ -41,8 +41,8 @@ namespace Student365.ViewModels
             set
             {
                 _group = value ?? "1";
-                if (!(_group == String.Empty))
-                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsNamesByGroupId(Convert.ToInt32((_group)));
+                if (_group != String.Empty)
+                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(Convert.ToInt32((_group)));
                 OnPropertyChanged(nameof(GroupSubjects));
                 OnPropertyChanged();
             }
@@ -56,9 +56,9 @@ namespace Student365.ViewModels
 
         public ICommand DeleteSubject { get; }
 
-        private string _selectedGroupSubject;
+        private GroupSubject _selectedGroupSubject;
 
-        public string SelectedGroupSubject
+        public GroupSubject SelectedGroupSubject
         {
             get => _selectedGroupSubject;
             set
@@ -80,6 +80,8 @@ namespace Student365.ViewModels
             }
         }
 
+        public ICommand ChangeMaxLabs { get; }
+
         public SubjectSetterViewModel()
         {
             _subjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjects();
@@ -87,6 +89,7 @@ namespace Student365.ViewModels
             AddToSelected = new AddToSelectedCommand(this);
             DeleteGroupSubject = new DeleteGroupSubjectCommand(this);
             DeleteSubject = new DeleteSubjectCommand(this);
+            ChangeMaxLabs = new ChangeMaxLabsCommand(this);
         }
     }
 }

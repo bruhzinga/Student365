@@ -184,6 +184,7 @@
     <Compile Include="Commands\NoteCommands\DeleteNoteCommand.cs" />
     <Compile Include="Commands\NoteCommands\SubmitNoteCommand.cs" />
     <Compile Include="Commands\SubjectSetterCommand\AddToSelectedCommand.cs" />
+    <Compile Include="Commands\SubjectSetterCommand\ChangeMaxLabsCommand.cs" />
     <Compile Include="Commands\SubjectSetterCommand\DeleteGroupSubjectCommand.cs" />
     <Compile Include="Commands\SubjectSetterCommand\DeleteSubjectCommand.cs" />
     <Compile Include="Commands\SubjectSetterCommand\SyncCommand.cs" />
@@ -252,7 +253,6 @@
     <Compile Include="ViewModels\AbsenceViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
-    <Compile Include="ViewModels\LabWorksSetterViewModel.cs" />
     <Compile Include="ViewModels\LabWorksViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -266,9 +266,6 @@
     </Compile>
     <Compile Include="Views\GradeView.xaml.cs" />
     <Compile Include="Views\GroupView.xaml.cs" />
-    <Compile Include="Views\LabWorksSetterView.xaml.cs">
-      <DependentUpon>LabWorksSetterView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LabWorksView.xaml.cs">
       <DependentUpon>LabWorksView.xaml</DependentUpon>
     </Compile>
@@ -308,10 +305,6 @@
     </Page>
     <Page Include="Views\GradeView.xaml" />
     <Page Include="Views\GroupView.xaml" />
-    <Page Include="Views\LabWorksSetterView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\LabWorksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

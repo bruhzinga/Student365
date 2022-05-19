@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +22,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Group" Type="smallint" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Max_Labs" Type="int" />
         </EntityType>
         <EntityType Name="LabWorks">
           <Key>
@@ -257,8 +258,7 @@
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Student365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -282,6 +282,7 @@
           <Property Name="Group" Type="Int16" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
+          <Property Name="Max_Labs" Type="Int32" />
         </EntityType>
         <EntityType Name="LabWork">
           <Key>
@@ -552,6 +553,7 @@
           <EntitySetMapping Name="GroupSubjects">
             <EntityTypeMapping TypeName="Student365Model.GroupSubject">
               <MappingFragment StoreEntitySet="GroupSubjects">
+                <ScalarProperty Name="Max_Labs" ColumnName="Max_Labs" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />

@@ -17,6 +17,7 @@ namespace Student365.Models
         public int Id { get; set; }
         public Nullable<short> Group { get; set; }
         public string Subject { get; set; }
+        public Nullable<int> Max_Labs { get; set; }
     
         public virtual Subject Subject1 { get; set; }
     }
