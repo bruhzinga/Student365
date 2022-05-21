@@ -22,19 +22,21 @@
                 <Grid.RowDefinitions>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition>
+                    </RowDefinition>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" ShowGridLines="False" Background="AliceBlue">
                     <Grid.ColumnDefinitions>
 
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+
                     <uc:ScheduleDataGrid Text="Понедельник">
                         <uc:ScheduleDataGrid.Schedule>
-                            <Binding Path="Schedule1_1" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"   Source="{StaticResource ScheduleViewModel}" />
+                            <Binding Path="Schedule1_1" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
                     <uc:ScheduleDataGrid Text="Вторник" Grid.Column="1">
@@ -70,6 +72,9 @@
                             <Binding Path="Schedule6_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
+                    <TextBox VerticalAlignment="Bottom" Background="Aqua"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Text="{Binding group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Arrow"></TextBox>
                 </Grid>
             </Grid>
         </TabItem>
@@ -91,7 +96,7 @@
                     </Grid.ColumnDefinitions>
                     <uc:ScheduleDataGrid Text="Понедельник">
                         <uc:ScheduleDataGrid.Schedule>
-                            <Binding Path="Schedule1_2" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"   Source="{StaticResource ScheduleViewModel}" />
+                            <Binding Path="Schedule1_2" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
                     <uc:ScheduleDataGrid Text="Вторник" Grid.Column="1">

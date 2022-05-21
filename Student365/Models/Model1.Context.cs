@@ -26,6 +26,7 @@ namespace Student365.Models
         }
     
         public virtual DbSet<Absence> Absences { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GroupSubject> GroupSubjects { get; set; }
         public virtual DbSet<LabWork> LabWorks { get; set; }
         public virtual DbSet<Note> Notes { get; set; }

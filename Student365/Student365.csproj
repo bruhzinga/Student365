@@ -178,6 +178,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AbsenceCommands\AddAbsenceCommand.cs" />
+    <Compile Include="Commands\GradeControlVIewModel\AddGradeCommand.cs" />
+    <Compile Include="Commands\GradeControlVIewModel\RemoverGradeCommnad.cs" />
     <Compile Include="Commands\LabWorksCommands\MinusCommand.cs" />
     <Compile Include="Commands\LabWorksCommands\PlusCommand.cs" />
     <Compile Include="Commands\NoteCommands\AddNoteCommand.cs" />
@@ -192,9 +194,10 @@
     <Compile Include="Commands\UserControlViewModel\AddUserCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\DeleteStudentCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\DeleteUserCommand.cs" />
-    <Compile Include="Converters\DateConverter.cs" />
-    <Compile Include="LoginWindow.xaml.cs" />
     <Compile Include="Models\Absence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GroupSubject.cs">
@@ -221,15 +224,7 @@
     <Compile Include="Models\Note.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositories\AbsenceRepository.cs" />
-    <Compile Include="Models\Repositories\GroupSubjectsRepository.cs" />
-    <Compile Include="Models\Repositories\IGenericRepository.cs" />
-    <Compile Include="Models\Repositories\LabWorksRepository.cs" />
-    <Compile Include="Models\Repositories\NoteRepository.cs" />
-    <Compile Include="Models\Repositories\SchedulesRepository.cs" />
-    <Compile Include="Models\Repositories\StudentsRepository.cs" />
-    <Compile Include="Models\Repositories\UnitOfWork.cs" />
-    <Compile Include="Models\Repositories\UsersRepository.cs" />
+    <Compile Include="Models\Repositories\GradeRepository.cs" />
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -245,6 +240,18 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GradeViewModel.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="LoginWindow.xaml.cs" />
+    <Compile Include="Models\Repositories\AbsenceRepository.cs" />
+    <Compile Include="Models\Repositories\GroupSubjectsRepository.cs" />
+    <Compile Include="Models\Repositories\IGenericRepository.cs" />
+    <Compile Include="Models\Repositories\LabWorksRepository.cs" />
+    <Compile Include="Models\Repositories\NoteRepository.cs" />
+    <Compile Include="Models\Repositories\SchedulesRepository.cs" />
+    <Compile Include="Models\Repositories\StudentsRepository.cs" />
+    <Compile Include="Models\Repositories\UnitOfWork.cs" />
+    <Compile Include="Models\Repositories\UsersRepository.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="UserControls\ScheduleDataGrid.xaml.cs">
@@ -257,6 +264,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleSetterViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="Models\Repositories\TeachersRepository.cs" />
     <Compile Include="ViewModels\SubjectSetterViewModel.cs" />
@@ -270,6 +278,9 @@
       <DependentUpon>LabWorksView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs" />
+    <Compile Include="Views\ScheduleSetterView.xaml.cs">
+      <DependentUpon>ScheduleSetterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ScheduleView.xaml.cs" />
     <Compile Include="Views\SubjectSetterView.xaml.cs">
       <DependentUpon>SubjectSetterView.xaml</DependentUpon>
@@ -309,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NoteView.xaml" />
+    <Page Include="Views\ScheduleSetterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ScheduleView.xaml" />
     <Page Include="Views\SubjectSetterView.xaml">
       <SubType>Designer</SubType>

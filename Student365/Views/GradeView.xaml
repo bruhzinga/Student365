@@ -4,16 +4,77 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
+             xmlns:vms="clr-namespace:Student365.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AliceBlue">
+    <UserControl.Resources>
+        <vms:GradeViewModel x:Key="Model"></vms:GradeViewModel>
+    </UserControl.Resources>
+    <Grid Background="AliceBlue" DataContext="{StaticResource Model}">
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel MinWidth="200">
+                    <ComboBox Foreground="Black"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              materialDesign:HintAssist.Hint="Some item"
+                              ItemsSource="{Binding Subjects_list}"
+                              Width="100">
+                        <ComboBox.SelectedItem>
+                            <Binding
+                                Path="NewSubject"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Grade">
+                        <TextBox.Text>
+                            <Binding
+                                Path="Grade"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Style="{DynamicResource Icon}"  Kind="Plus" Margin="8" VerticalAlignment="Center" Background="Green" />
+                    </Button>
+                    <Button   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="Red" Cursor="Hand">Close</Button>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
 
-        <ListView>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"></StackPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+            <StackPanel>
+                <Grid>
+                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ></Button>
+                </Grid>
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Subjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject}"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListView  ItemsSource="{Binding Grades}">
+                                        <ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"></StackPanel>
+                                            </ItemsPanelTemplate>
+                                        </ListView.ItemsPanel>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Content="{Binding Value}" Command="{Binding Remove,Source={StaticResource Model}}" CommandParameter="{Binding Key}"></Button>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </materialDesign:DialogHost>
     </Grid>
 </UserControl>

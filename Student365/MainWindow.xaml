@@ -58,6 +58,9 @@
             <DataTemplate DataType="{x:Type vms:SubjectSetterViewModel}">
                 <views:SubjectSetterView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:GradeViewModel}">
+                <views:GradeView />
+            </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

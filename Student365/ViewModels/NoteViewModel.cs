@@ -22,11 +22,22 @@ namespace Student365.ViewModels
             set
             {
                 _selectedNote = value;
-                _text = _selectedNote.Text;
-                _selectedName = SelectedNote.Header;
-                OnPropertyChanged(nameof(SelectedName));
-                OnPropertyChanged(nameof(SelectedNote));
-                OnPropertyChanged(nameof(Text));
+                if (!(_selectedNote is null))
+                {
+                    _text = _selectedNote.Text;
+                    _selectedName = SelectedNote.Header;
+                    OnPropertyChanged(nameof(SelectedName));
+                    OnPropertyChanged(nameof(SelectedNote));
+                    OnPropertyChanged(nameof(Text));
+                }
+                else
+                {
+                    _text = "";
+                    _selectedName = "";
+                    OnPropertyChanged(nameof(SelectedName));
+                    OnPropertyChanged(nameof(SelectedNote));
+                    OnPropertyChanged(nameof(Text));
+                }
             }
         }
 

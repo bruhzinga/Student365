@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-
              xmlns:local="clr-namespace:Student365.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,13 +12,8 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
             <Border BorderThickness="2" BorderBrush="Black">
-                <ListView Grid.Column="0" Style="{StaticResource MaterialDesignListView}"   ItemsSource="{Binding Notes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding  SelectedNote,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                <ListView Grid.Column="0" Style="{StaticResource MaterialDesignListView}"   ItemsSource="{Binding Notes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding  SelectedNote,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalContentAlignment="Center">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -28,22 +22,18 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-
-            <StackPanel Grid.Row="1">
-                <TextBox Style="{StaticResource MaterialDesignTextBox}" Cursor="Arrow" Text="{Binding NewNoteHeader,UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TextWrapping="Wrap"></TextBox>
-                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="BlueViolet" Content="Add note" Command="{Binding AddNoteCommand}" Cursor="Hand" />
-                <Button Style="{StaticResource MaterialDesignFlatDarkButton}" Background="Red" Command="{Binding DeleteNoteCommand}" Margin="0,10,0,0 " >Delete Note</Button>
-            </StackPanel>
         </Grid>
 
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" Padding="5,5,5,50" CornerRadius="2">
             <StackPanel>
-                <TextBox Style="{StaticResource MaterialDesignTextBox}" Foreground="Black" Text="{Binding SelectedName}" HorizontalAlignment="Center" ></TextBox>
-                <TextBox  Style="{StaticResource MaterialDesignTextBox}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Text}" Foreground="Black" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" MinWidth="400" MinHeight="200" Background="Azure" TextWrapping="Wrap">
-                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Cursor="Arrow" Text="{Binding NewNoteHeader, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TextWrapping="Wrap" Margin="10 30 10 01" Width="398" />
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="#FF2B92E2" Content="Add note" Command="{Binding AddNoteCommand}" Cursor="Hand" Margin="0 10 0 10" />
+                <Button Style="{StaticResource MaterialDesignFlatDarkButton}" Background="Red" Command="{Binding DeleteNoteCommand}" Margin="0,10,0,0 " Content="Delete Note" Cursor="Hand" />
+                <TextBox  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextAlignment="Center" Text="{Binding Text}" Foreground="Black" BorderBrush="Black" BorderThickness="1" MinWidth="400" MinHeight="200" Background="Azure" TextWrapping="Wrap" Height="209" Width="573" />
+                <TextBox Style="{StaticResource MaterialDesignTextBox}" Foreground="Black" Text="{Binding SelectedName}" HorizontalAlignment="Center" Margin="10 90 10 10" ></TextBox>
             </StackPanel>
         </Border>
 
-        <Button Grid.Column="1" Content="Confirm" HorizontalAlignment="Right"  Command="{Binding SubmitCommand}" VerticalAlignment="Bottom" Margin="100" Cursor="Hand" Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
+        <Button Grid.Column="1" Content="Confirm" HorizontalAlignment="Center"  Command="{Binding SubmitCommand}" VerticalAlignment="Top" Margin="0,393,0,0" Cursor="Hand" Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
     </Grid>
 </UserControl>

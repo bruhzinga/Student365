@@ -28,16 +28,16 @@ namespace Student365.ViewModels
             _students = UnitOfWork.StudentsRepository.GetGroup();
         }
 
-        private string _group;
+        private int _group;
 
-        public string Group
+        public int Group
         {
             get => _group;
             set
             {
-                _group = value ?? UnitOfWork.StudentsRepository.GetCurrentUserGroup().ToString();
-                if (_group != String.Empty)
-                    Students = UnitOfWork.StudentsRepository.GetGroup(Convert.ToInt32(_group));
+                _group = value;
+                if (_group != 0)
+                    Students = UnitOfWork.StudentsRepository.GetGroup(_group);
                 OnPropertyChanged(nameof(Students));
                 OnPropertyChanged();
             }

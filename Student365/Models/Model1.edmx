@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,6 +14,15 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Reason" Type="varchar" MaxLength="255" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="grade" Type="smallint" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="GroupSubjects">
           <Key>
@@ -119,6 +128,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Grade__subject__339FAB6E">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__username__3587F3E0">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__GroupSubj__Subje__0C85DE4D">
           <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -213,6 +246,7 @@
         </Association>
         <EntityContainer Name="Хранилище Student365ModelContainer">
           <EntitySet Name="Absence" EntityType="Self.Absence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWorks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
@@ -228,6 +262,14 @@
           <AssociationSet Name="FK__Absence__Usernam__236943A5" Association="Self.FK__Absence__Usernam__236943A5">
             <End Role="Users" EntitySet="Users" />
             <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__subject__339FAB6E" Association="Self.FK__Grade__subject__339FAB6E">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__username__3587F3E0" Association="Self.FK__Grade__username__3587F3E0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
           <AssociationSet Name="FK__GroupSubj__Subje__0C85DE4D" Association="Self.FK__GroupSubj__Subje__0C85DE4D">
             <End Role="Subjects" EntitySet="Subjects" />
@@ -258,7 +300,8 @@
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Student365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -274,6 +317,17 @@
           <NavigationProperty Name="Subject1" Relationship="Self.FK__Absence__Subject__245D67DE" FromRole="Absence" ToRole="Subjects" />
           <NavigationProperty Name="User" Relationship="Self.FK__Absence__Usernam__236943A5" FromRole="Absence" ToRole="Users" />
         </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="grade1" Type="Int16" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Grade__subject__339FAB6E" FromRole="Grade" ToRole="Subjects" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Grade__username__3587F3E0" FromRole="Grade" ToRole="Users" />
+        </EntityType>
         <EntityType Name="GroupSubject">
           <Key>
             <PropertyRef Name="Id" />
@@ -281,8 +335,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Group" Type="Int16" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
           <Property Name="Max_Labs" Type="Int32" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="LabWork">
           <Key>
@@ -342,6 +396,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsSelected" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Subject__245D67DE" FromRole="Subjects" ToRole="Absence" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK__Grade__subject__339FAB6E" FromRole="Subjects" ToRole="Grade" />
           <NavigationProperty Name="GroupSubjects" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="Subjects" ToRole="GroupSubjects" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="Subjects" ToRole="LabWorks" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Subjects" ToRole="Schedule" />
@@ -363,6 +418,7 @@
           <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Usernam__236943A5" FromRole="Users" ToRole="Absence" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK__Grade__username__3587F3E0" FromRole="Users" ToRole="Grade" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Userna__02FC7413" FromRole="Users" ToRole="LabWorks" />
           <NavigationProperty Name="Notes" Relationship="Self.FK__Notes__Username__4CA06362" FromRole="Users" ToRole="Notes" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Students__UserNa__59FA5E80" FromRole="Users" ToRole="Students" />
@@ -391,6 +447,30 @@
             </Principal>
             <Dependent Role="Absence">
               <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__subject__339FAB6E">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__username__3587F3E0">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -488,6 +568,7 @@
         </Association>
         <EntityContainer Name="Student365Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Absences" EntityType="Self.Absence" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
           <EntitySet Name="GroupSubjects" EntityType="Self.GroupSubject" />
           <EntitySet Name="LabWorks" EntityType="Self.LabWork" />
           <EntitySet Name="Notes" EntityType="Self.Note" />
@@ -503,6 +584,14 @@
           <AssociationSet Name="FK__Absence__Usernam__236943A5" Association="Self.FK__Absence__Usernam__236943A5">
             <End Role="Users" EntitySet="Users" />
             <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__subject__339FAB6E" Association="Self.FK__Grade__subject__339FAB6E">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__username__3587F3E0" Association="Self.FK__Grade__username__3587F3E0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Grade" EntitySet="Grades" />
           </AssociationSet>
           <AssociationSet Name="FK__GroupSubj__Subje__0C85DE4D" Association="Self.FK__GroupSubj__Subje__0C85DE4D">
             <End Role="Subjects" EntitySet="Subjects" />
@@ -550,13 +639,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Student365Model.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="grade1" ColumnName="grade" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GroupSubjects">
             <EntityTypeMapping TypeName="Student365Model.GroupSubject">
               <MappingFragment StoreEntitySet="GroupSubjects">
-                <ScalarProperty Name="Max_Labs" ColumnName="Max_Labs" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Max_Labs" ColumnName="Max_Labs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

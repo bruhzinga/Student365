@@ -4,18 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e8e46b3e24d64bc98e603b10d394a474" Name="Diagram1">
-        <EntityTypeShape EntityType="Student365Model.Absence" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.GroupSubject" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.LabWork" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Note" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Schedule" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Student" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Subject" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.Teacher" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.User" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+      <Diagram DiagramId="eb75100e9b1f4fb580a25b93e222bf94" Name="Diagram1">
+        <EntityTypeShape EntityType="Student365Model.Absence" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Grade" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.GroupSubject" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.LabWork" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Note" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Schedule" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Student" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Subject" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.Teacher" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.User" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
         <AssociationConnector Association="Student365Model.FK__Absence__Subject__245D67DE" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__Absence__Usernam__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="Student365Model.FK__Grade__subject__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="Student365Model.FK__Grade__username__3587F3E0" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__GroupSubj__Subje__0C85DE4D" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__LabWorks__Subjec__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="Student365Model.FK__LabWorks__Userna__02FC7413" ManuallyRouted="false" />

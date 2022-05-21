@@ -29,6 +29,7 @@ namespace Student365.ViewModels
             NavigateToAbsenceCommand = new NavigateCommand(_navigationStore, new AbsenceViewModel());
             NavigateToUserControlCommand = new NavigateCommand(_navigationStore, new UserControlViewModel());
             NavigateToSubjectSetterCommand = new NavigateCommand(_navigationStore, new SubjectSetterViewModel());
+            NavigateToGradeCommand = new NavigateCommand(_navigationStore, new GradeViewModel());
         }
 
         private void OnCurrentViewModelChanged()
@@ -90,6 +91,12 @@ namespace Student365.ViewModels
                     Name = "Absence",
                     Text = "Absence",
                     Kind = "BlockHelper"
+                },
+                new NavItems
+                {
+                    Name = "Grade",
+                    Text = "Grade",
+                    Kind = "Grade"
                 }
             };
         }
@@ -179,6 +186,10 @@ namespace Student365.ViewModels
                     case { Name: "SubjectSetter" }:
                         NavigateToSubjectSetterCommand.Execute(null);
                         break;
+
+                    case { Name: "Grade" }:
+                        NavigateToGradeCommand.Execute(null);
+                        break;
                 }
                 OnPropertyChanged(nameof(Selected));
             }
@@ -217,7 +228,7 @@ namespace Student365.ViewModels
 
         public ICommand NavigateToSubjectSetterCommand { get; }
 
-        public ICommand NavigateToLabWorksSetterCommand { get; }
+        public ICommand NavigateToGradeCommand { get; }
     }
 
     public class NavItems

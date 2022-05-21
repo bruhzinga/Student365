@@ -27,6 +27,8 @@ namespace Student365.Models.Repositories
         public static AbsenceRepository AbsenceRepository { get; set; } = new AbsenceRepository();
         public static TeachersRepository TeachersRepository { get; set; } = new TeachersRepository();
 
+        public static GradeRepository GradeRepository { get; set; } = new GradeRepository();
+
         public static User CurrentsUser { get; set; }
     }
 }

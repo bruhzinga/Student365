@@ -33,16 +33,16 @@ namespace Student365.ViewModels
             }
         }
 
-        private string _group;
+        private int _group;
 
-        public string Group
+        public int Group
         {
             get => _group;
             set
             {
-                _group = value ?? "1";
-                if (_group != String.Empty)
-                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(Convert.ToInt32((_group)));
+                _group = value;
+                if (_group != 0)
+                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(_group);
                 OnPropertyChanged(nameof(GroupSubjects));
                 OnPropertyChanged();
             }
