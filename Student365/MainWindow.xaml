@@ -61,6 +61,9 @@
             <DataTemplate DataType="{x:Type vms:GradeViewModel}">
                 <views:GradeView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ScheduleSetterViewModel}">
+                <views:ScheduleSetterView />
+            </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

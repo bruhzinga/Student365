@@ -17,8 +17,8 @@ namespace Student365.Commands.SubjectSetterCommand
         public override void Execute(object parameter)
         {
             UnitOfWork.GroupSubjectsRepository.AddToSelected(_subjectSetterViewModel.Subjects.Where(x => (bool)x.IsSelected).ToList(),
-                Convert.ToInt16(_subjectSetterViewModel.Group));
-            _subjectSetterViewModel.GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(Convert.ToInt32((_subjectSetterViewModel.Group)));
+                Convert.ToInt16(_subjectSetterViewModel.Group), Convert.ToInt16(_subjectSetterViewModel.Kurs));
+            _subjectSetterViewModel.GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(Convert.ToInt32((_subjectSetterViewModel.Group)), Convert.ToInt32((_subjectSetterViewModel.Kurs)));
         }
     }
 }

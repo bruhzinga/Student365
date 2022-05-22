@@ -31,7 +31,7 @@ namespace Student365.Models.Repositories
 
         public void AddLabInfo(GroupSubject subject)
         {
-            var usernames = UnitOfWork.StudentsRepository.GetAllStudentsByGroupId((int)subject.Group).Select(x => x.UserName).ToList();
+            var usernames = UnitOfWork.StudentsRepository.GetAllStudentsByGroupId((int)subject.Group, (short)subject.Kurs).Select(x => x.UserName).ToList();
             var labWorks = _dbSet.Where(x => usernames.Contains(x.Username) && x.Subject == subject.Subject).ToList();
 
             foreach (var username in usernames)
@@ -63,7 +63,7 @@ namespace Student365.Models.Repositories
 
         public void RemoveLabInfo(GroupSubject selected, string subject)
         {
-            var usernames = UnitOfWork.StudentsRepository.GetAllStudentsByGroupId((int)selected.Group).Select(x => x.UserName).ToList();
+            var usernames = UnitOfWork.StudentsRepository.GetAllStudentsByGroupId((int)selected.Group, (short)selected.Kurs).Select(x => x.UserName).ToList();
             var labWorks = _dbSet.Where(x => usernames.Contains(x.Username) && x.Subject == subject).ToList();
 
             foreach (var labWork in labWorks)

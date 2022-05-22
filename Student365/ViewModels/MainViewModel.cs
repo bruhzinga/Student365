@@ -30,6 +30,7 @@ namespace Student365.ViewModels
             NavigateToUserControlCommand = new NavigateCommand(_navigationStore, new UserControlViewModel());
             NavigateToSubjectSetterCommand = new NavigateCommand(_navigationStore, new SubjectSetterViewModel());
             NavigateToGradeCommand = new NavigateCommand(_navigationStore, new GradeViewModel());
+            NavigateToScheduleSetterCommand = new NavigateCommand(_navigationStore, new ScheduleSetterViewModel());
         }
 
         private void OnCurrentViewModelChanged()
@@ -107,9 +108,9 @@ namespace Student365.ViewModels
             {
                 new NavItems
                 {
-                    Name = "Schedule",
-                    Kind = "Schedule",
-                    Text = "Schedule"
+                    Name = "ScheduleSetter",
+                    Text = "ScheduleSetter",
+                    Kind = "Schedule"
                 },
                 new NavItems
                 {
@@ -128,7 +129,7 @@ namespace Student365.ViewModels
                 {
                     Name = "SubjectSetter",
                     Text = "Subjects",
-                    Kind = "book"
+                    Kind = "Book"
                 },
             };
         }
@@ -190,6 +191,10 @@ namespace Student365.ViewModels
                     case { Name: "Grade" }:
                         NavigateToGradeCommand.Execute(null);
                         break;
+
+                    case { Name: "ScheduleSetter" }:
+                        NavigateToScheduleSetterCommand.Execute(null);
+                        break;
                 }
                 OnPropertyChanged(nameof(Selected));
             }
@@ -229,6 +234,8 @@ namespace Student365.ViewModels
         public ICommand NavigateToSubjectSetterCommand { get; }
 
         public ICommand NavigateToGradeCommand { get; }
+
+        public ICommand NavigateToScheduleSetterCommand { get; }
     }
 
     public class NavItems

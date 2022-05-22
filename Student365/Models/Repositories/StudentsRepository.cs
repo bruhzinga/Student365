@@ -23,7 +23,7 @@ namespace Student365.Models.Repositories
         {
             _dbSet.Add(item);
             _context.SaveChanges();
-            var groupsubj = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(item.Group);
+            var groupsubj = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(item.Group, item.Kurs);
             foreach (var grrouSubject in groupsubj)
             {
                 UnitOfWork.LabWorksRepository.AddLabInfo(grrouSubject);
@@ -59,7 +59,8 @@ namespace Student365.Models.Repositories
         public ObservableCollection<Student> GetGroup()
         {
             var group = GetCurrentUserGroup();
-            return new ObservableCollection<Student>(_dbSet.Where(x => x.Group == group).ToList());
+            var kurs = GetCurrentUserKurs();
+            return new ObservableCollection<Student>(_dbSet.Where(x => x.Group == group && x.Kurs == kurs).ToList());
         }
 
         public int GetCurrentUserGroup()
@@ -68,9 +69,9 @@ namespace Student365.Models.Repositories
                 .FirstOrDefault();
         }
 
-        public ObservableCollection<Student> GetGroup(int group)
+        public ObservableCollection<Student> GetGroup(int group, short Kurs)
         {
-            return new ObservableCollection<Student>(_dbSet.Where(x => x.Group == group).ToList());
+            return new ObservableCollection<Student>(_dbSet.Where(x => x.Group == group && x.Kurs == Kurs).ToList());
         }
 
         public int GetCurrentUserSubGroup()
@@ -84,9 +85,15 @@ namespace Student365.Models.Repositories
             return new ObservableCollection<Student>(_dbSet.ToList());
         }
 
-        public List<Student> GetAllStudentsByGroupId(int groupid)
+        public List<Student> GetAllStudentsByGroupId(int groupid, short Kurs)
         {
-            return _dbSet.Where(x => x.Group == groupid).ToList();
+            return _dbSet.Where(x => x.Group == groupid && x.Kurs == Kurs).ToList();
+        }
+
+        public int GetCurrentUserKurs()
+        {
+            return _dbSet.Where(x => x.UserName == UnitOfWork.CurrentsUser.UserName).Select(x => x.Kurs)
+                     .FirstOrDefault();
         }
     }
 }

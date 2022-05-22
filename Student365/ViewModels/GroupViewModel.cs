@@ -37,7 +37,7 @@ namespace Student365.ViewModels
             {
                 _group = value;
                 if (_group != 0)
-                    Students = UnitOfWork.StudentsRepository.GetGroup(_group);
+                    Students = UnitOfWork.StudentsRepository.GetGroup(_group, 2);
                 OnPropertyChanged(nameof(Students));
                 OnPropertyChanged();
             }

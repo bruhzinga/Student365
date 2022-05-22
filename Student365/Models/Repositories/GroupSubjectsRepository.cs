@@ -19,9 +19,9 @@ namespace Student365.Models.Repositories
             _dbSet_Sub = _context.Set<Subject>();
         }
 
-        public ObservableCollection<GroupSubject> GetAllSubjectsByGroupId(int groupId)
+        public ObservableCollection<GroupSubject> GetAllSubjectsByGroupId(int groupId, int Kurs)
         {
-            return new ObservableCollection<GroupSubject>(_dbSet_Gr.Where(x => x.Group == groupId));
+            return new ObservableCollection<GroupSubject>(_dbSet_Gr.Where(x => x.Group == groupId && x.Kurs == Kurs).ToList());
         }
 
         public void Remove(Subject selectedSubject)
@@ -30,7 +30,7 @@ namespace Student365.Models.Repositories
             _context.SaveChanges();
         }
 
-        public ObservableCollection<Subject> GetAllSubjects()
+        public ObservableCollection<Subject> GetAllSubjects(short kurs)
 
         {
             var All = _dbSet_Sub.ToList();
@@ -66,14 +66,14 @@ namespace Student365.Models.Repositories
             _context.SaveChanges();
         }
 
-        public void AddToSelected(List<Subject> subjects, short group)
+        public void AddToSelected(List<Subject> subjects, short group, short Kurs)
         {
-            var current = _dbSet_Gr.Where(x => x.Group == group).ToList();
+            var current = _dbSet_Gr.Where(x => x.Group == group && x.Kurs == Kurs).ToList();
             foreach (var subject in subjects)
             {
                 if (!current.Any(x => x.Subject == subject.Name))
                 {
-                    _dbSet_Gr.Add(new GroupSubject() { Group = group, Subject = subject.Name });
+                    _dbSet_Gr.Add(new GroupSubject() { Group = group, Subject = subject.Name, Kurs = (byte?)Kurs });
                 }
             }
 
@@ -88,9 +88,11 @@ namespace Student365.Models.Repositories
             _context.SaveChanges();
         }
 
-        public ObservableCollection<string> GetAllSubjectsNamesByGroupId(int getCurrentUserGroup)
+        public ObservableCollection<string> GetAllSubjectsNamesByGroupId()
         {
-            return new ObservableCollection<string>(_dbSet_Gr.Where(x => x.Group == getCurrentUserGroup).Select(x => x.Subject));
+            var group = UnitOfWork.StudentsRepository.GetCurrentUserGroup();
+            var Kurs = UnitOfWork.StudentsRepository.GetCurrentUserKurs();
+            return new ObservableCollection<string>(_dbSet_Gr.Where(x => x.Group == group && x.Kurs == Kurs).Select(x => x.Subject));
         }
     }
 }

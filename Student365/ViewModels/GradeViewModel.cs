@@ -80,7 +80,7 @@ namespace Student365.ViewModels
             GetSubjects();
             Subjects_list = new ObservableCollection<string>(
                 UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(UnitOfWork.StudentsRepository
-                    .GetCurrentUserGroup()).Select(x => x.Subject));
+                    .GetCurrentUserGroup(), UnitOfWork.StudentsRepository.GetCurrentUserKurs()).Select(x => x.Subject));
             AddCommand = new AddGradeCommand(this);
             Remove = new RemoverGradeCommnad(this);
         }

@@ -22,7 +22,14 @@ namespace Student365.Commands
                 var sw = new MainWindow();
                 Application.Current.MainWindow.Close();
                 sw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                App.navigationStore.CurrentViewModel = new ScheduleViewModel();
+                App.navigationStore.CurrentViewModel = UnitOfWork.CurrentsUser.Role switch
+                {
+                    "User" => new ScheduleViewModel(),
+                    "Admin" => new ViewModels.UserControlViewModel(),
+                    "Teacher" => new ScheduleSetterViewModel(),
+                    _ => App.navigationStore.CurrentViewModel
+                };
+
                 sw.DataContext = new MainViewModel(App.navigationStore);
                 sw.View.DataContext = new MainViewModel(App.navigationStore);
                 System.Windows.Application.Current.MainWindow = sw;

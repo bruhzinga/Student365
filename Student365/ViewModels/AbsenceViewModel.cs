@@ -85,8 +85,7 @@ namespace Student365.ViewModels
         public AbsenceViewModel()
         {
             SubjectList =
-                UnitOfWork.GroupSubjectsRepository.GetAllSubjectsNamesByGroupId(UnitOfWork.StudentsRepository
-                    .GetCurrentUserGroup());
+                UnitOfWork.GroupSubjectsRepository.GetAllSubjectsNamesByGroupId();
 
             Absences = UnitOfWork.AbsenceRepository.GetAllByCurrentUser();
             AbsenceCount = UnitOfWork.AbsenceRepository.GetCountOfAbsencesByUser();

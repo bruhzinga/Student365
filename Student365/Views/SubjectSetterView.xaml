@@ -19,7 +19,8 @@
         <Grid>
             <StackPanel>
                 <Button Command="{Binding Sync}">Confirm</Button>
-                <DataGrid ItemsSource="{Binding Subjects}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+
+                <DataGrid ItemsSource="{Binding Subjects}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" MaxHeight="600">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn
                             Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
@@ -56,8 +57,20 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Command="{Binding AddToSelected}">ADD TO SELECTED GROUP</Button>
+                <TextBox
+                    materialDesign:HintAssist.Hint="Kurs" Foreground="Black" Cursor="Arrow">
+
+                    <TextBox.Text>
+                        <Binding
+                            Path="Kurs"
+                            UpdateSourceTrigger="PropertyChanged"
+                            Mode="TwoWay">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
         </Grid>
+
         <Grid Grid.Column="1">
             <StackPanel>
                 <TextBox

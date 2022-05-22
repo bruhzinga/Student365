@@ -23,6 +23,7 @@ namespace Student365.Models
         public string Auditorium { get; set; }
         public byte Day { get; set; }
         public int Id { get; set; }
+        public Nullable<byte> Kurs { get; set; }
     
         public virtual Subject Subject1 { get; set; }
     }

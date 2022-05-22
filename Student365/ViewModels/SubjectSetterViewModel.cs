@@ -42,7 +42,7 @@ namespace Student365.ViewModels
             {
                 _group = value;
                 if (_group != 0)
-                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(_group);
+                    GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(_group, Kurs);
                 OnPropertyChanged(nameof(GroupSubjects));
                 OnPropertyChanged();
             }
@@ -80,11 +80,24 @@ namespace Student365.ViewModels
             }
         }
 
+        private short _kurs;
+
+        public short Kurs
+        {
+            get => _kurs;
+            set
+            {
+                _kurs = value;
+                GroupSubjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjectsByGroupId(_group, Kurs);
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand ChangeMaxLabs { get; }
 
         public SubjectSetterViewModel()
         {
-            _subjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjects();
+            Subjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjects(Kurs);
             Sync = new SyncCommand(this);
             AddToSelected = new AddToSelectedCommand(this);
             DeleteGroupSubject = new DeleteGroupSubjectCommand(this);

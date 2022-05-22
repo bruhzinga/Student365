@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Student365Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,6 +32,7 @@
           <Property Name="Group" Type="smallint" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
           <Property Name="Max_Labs" Type="int" />
+          <Property Name="Kurs" Type="tinyint" />
         </EntityType>
         <EntityType Name="LabWorks">
           <Key>
@@ -66,6 +67,7 @@
           <Property Name="Auditorium" Type="nvarchar" MaxLength="50" />
           <Property Name="Day" Type="tinyint" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kurs" Type="tinyint" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -300,8 +302,7 @@
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Student365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -337,6 +338,7 @@
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Max_Labs" Type="Int32" />
           <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
+          <Property Name="Kurs" Type="Byte" />
         </EntityType>
         <EntityType Name="LabWork">
           <Key>
@@ -375,6 +377,7 @@
           <Property Name="Day" Type="Byte" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Subject1" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Schedule" ToRole="Subjects" />
+          <Property Name="Kurs" Type="Byte" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -652,6 +655,7 @@
           <EntitySetMapping Name="GroupSubjects">
             <EntityTypeMapping TypeName="Student365Model.GroupSubject">
               <MappingFragment StoreEntitySet="GroupSubjects">
+                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
@@ -684,6 +688,7 @@
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="Student365Model.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
                 <ScalarProperty Name="Week_Num" ColumnName="Week Num" />

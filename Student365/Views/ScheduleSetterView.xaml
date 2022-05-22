@@ -4,18 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Student365.Views"
+             xmlns:vms="clr-namespace:Student365.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vms:ScheduleSetterViewModel  x:Key="Model" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition>
+            <RowDefinition Height="*">
             </RowDefinition>
             <RowDefinition>
             </RowDefinition>
         </Grid.RowDefinitions>
+        <Grid DataContext="{StaticResource Model}">
+            <StackPanel HorizontalAlignment="Center"
+            Orientation="Horizontal"
+            Margin="4">
+                <RadioButton Background="Transparent" Foreground="Black"
+                Style="{StaticResource MaterialDesignTabRadioButton}"
+                Margin="4"
+                IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                Content="FIRST" />
+                <RadioButton Background="Transparent" Foreground="Black"
+                Style="{StaticResource MaterialDesignTabRadioButton}"
+                Margin="4"
+                IsChecked="False"
+                Content="SECOND" />
+            </StackPanel>
+        </Grid>
 
-        <Grid Grid.Row="1" ShowGridLines="False" Background="AliceBlue">
+        <Grid Grid.Row="1" ShowGridLines="False" Background="AliceBlue" DataContext="{StaticResource Model}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -23,39 +43,39 @@
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <TextBlock Text ="Понедельник" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Monday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Monday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <TextBlock Text ="Вторник" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Tuesday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Tuesday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock Text ="Среда" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Wednesday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Wednesday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" ShowGridLines="False" Background="AliceBlue">
+        <Grid Grid.Row="2" ShowGridLines="False" Background="AliceBlue" DataContext="{StaticResource Model}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition>
                 </ColumnDefinition>
@@ -64,37 +84,46 @@
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <TextBlock Text ="Четверг" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Thursday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Thursday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <TextBlock Text ="Пятница" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Friday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Friday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock Text ="Суббота" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-                <DataGrid  ItemsSource="{Binding Saturday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False">
+                <DataGrid  ItemsSource="{Binding Saturday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                        <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
+            <TextBox VerticalAlignment="Bottom" Background="Aqua"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="Black"
+                     Text="{Binding Group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Arrow"></TextBox>
+            <TextBox Grid.Column="1" VerticalAlignment="Bottom" Background="Aqua"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="Black"
+                     Text="{Binding Subgroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Arrow"></TextBox>
+            <TextBox Grid.Column="2" VerticalAlignment="Bottom" Background="Aqua"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="Black"
+                     Text="{Binding Kurs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Arrow"></TextBox>
         </Grid>
     </Grid>
 </UserControl>
