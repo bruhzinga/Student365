@@ -6,6 +6,10 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid
+                }">
+                <Setter Property="IsReadOnly" Value="True" />
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:CustomColorTheme BaseTheme="Light" PrimaryColor="AliceBlue" SecondaryColor="DarkBlue" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

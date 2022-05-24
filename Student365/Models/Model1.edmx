@@ -88,6 +88,16 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsSelected" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Teachers">
           <Key>
             <PropertyRef Name="Id" />
@@ -105,7 +115,9 @@
           <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <Association Name="FK__Absence__Subject__245D67DE">
-          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
@@ -131,7 +143,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Grade__subject__339FAB6E">
-          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
@@ -169,7 +183,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LabWorks__Subjec__02084FDA">
-          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LabWorks" Type="Self.LabWorks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
@@ -255,6 +271,7 @@
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Absence__Subject__245D67DE" Association="Self.FK__Absence__Subject__245D67DE">
@@ -337,8 +354,8 @@
           <Property Name="Group" Type="Int16" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Max_Labs" Type="Int32" />
-          <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
           <Property Name="Kurs" Type="Byte" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="GroupSubjects" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="LabWork">
           <Key>
@@ -376,8 +393,8 @@
           <Property Name="Auditorium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Day" Type="Byte" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Subject1" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Schedule" ToRole="Subjects" />
           <Property Name="Kurs" Type="Byte" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Schedule" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -403,6 +420,16 @@
           <NavigationProperty Name="GroupSubjects" Relationship="Self.FK__GroupSubj__Subje__0C85DE4D" FromRole="Subjects" ToRole="GroupSubjects" />
           <NavigationProperty Name="LabWorks" Relationship="Self.FK__LabWorks__Subjec__02084FDA" FromRole="Subjects" ToRole="LabWorks" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__Subjec__17036CC0" FromRole="Subjects" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -492,7 +519,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LabWorks__Subjec__02084FDA">
-          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LabWorks" Type="Self.LabWork" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
@@ -578,6 +607,7 @@
           <EntitySet Name="Schedules" EntityType="Self.Schedule" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Absence__Subject__245D67DE" Association="Self.FK__Absence__Subject__245D67DE">
@@ -655,11 +685,11 @@
           <EntitySetMapping Name="GroupSubjects">
             <EntityTypeMapping TypeName="Student365Model.GroupSubject">
               <MappingFragment StoreEntitySet="GroupSubjects">
-                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Max_Labs" ColumnName="Max_Labs" />
+                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -688,7 +718,6 @@
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="Student365Model.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
                 <ScalarProperty Name="Week_Num" ColumnName="Week Num" />
@@ -698,6 +727,7 @@
                 <ScalarProperty Name="Auditorium" ColumnName="Auditorium" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -719,6 +749,17 @@
               <MappingFragment StoreEntitySet="Subjects">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Student365Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

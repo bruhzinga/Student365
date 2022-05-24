@@ -1,4 +1,5 @@
-﻿using Student365.Models.Repositories;
+﻿using System.Linq;
+using Student365.Models.Repositories;
 using Student365.ViewModels;
 
 namespace Student365.Commands.SubjectSetterCommand
@@ -14,6 +15,11 @@ namespace Student365.Commands.SubjectSetterCommand
 
         public override void Execute(object parameter)
         {
+            var delete = _subjectSetterViewModel.Subjects.Where(x => string.IsNullOrEmpty(x.Name)).ToList();
+            foreach (var subject in delete)
+            {
+                _subjectSetterViewModel.Subjects.Remove(subject);
+            }
             UnitOfWork.GroupSubjectsRepository.AddOrUpdateAll(_subjectSetterViewModel.Subjects);
         }
     }

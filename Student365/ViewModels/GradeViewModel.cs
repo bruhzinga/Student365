@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Windows.Input;
@@ -9,7 +11,7 @@ using Student365.Models.Repositories;
 
 namespace Student365.ViewModels
 {
-    public class GradeViewModel : BaseViewModel
+    public class GradeViewModel : BaseViewModel, IDataErrorInfo
     {
         public ObservableCollection<Custom> Subjects
         {
@@ -47,9 +49,9 @@ namespace Student365.ViewModels
             }
         }
 
-        private short _grade;
+        private string _grade;
 
-        public short Grade
+        public string Grade
         {
             get => _grade;
             set
@@ -83,6 +85,41 @@ namespace Student365.ViewModels
                     .GetCurrentUserGroup(), UnitOfWork.StudentsRepository.GetCurrentUserKurs()).Select(x => x.Subject));
             AddCommand = new AddGradeCommand(this);
             Remove = new RemoverGradeCommnad(this);
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(Grade):
+                        var grade = int.TryParse(Grade, out int n);
+                        if (!grade)
+                            return "Неверный формат оценки";
+                        // Validate property and return a string if there is an error
+                        if (n > 10 || n < 1)
+                        {
+                            return "Оценка должна быть в диапазоне от 0 до 10";
+                        }
+
+                        break;
+
+                    case nameof(NewSubject):
+                        if (string.IsNullOrWhiteSpace(NewSubject))
+                            error = "Не может быть пустым";
+                        break;
+                }
+
+                return error;
+            }
         }
 
         public void GetSubjects()

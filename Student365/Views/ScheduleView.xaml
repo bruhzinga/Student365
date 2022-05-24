@@ -72,9 +72,6 @@
                             <Binding Path="Schedule6_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
-                    <TextBox VerticalAlignment="Bottom" Background="Aqua"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                             Text="{Binding group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Arrow"></TextBox>
                 </Grid>
             </Grid>
         </TabItem>

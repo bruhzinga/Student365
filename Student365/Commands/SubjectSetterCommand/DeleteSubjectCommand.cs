@@ -14,6 +14,10 @@ namespace Student365.Commands.SubjectSetterCommand
 
         public override void Execute(object parameter)
         {
+            if (_subjectSetterViewModel.SelectedSubject is null)
+            {
+                return;
+            }
             UnitOfWork.GroupSubjectsRepository.Remove(_subjectSetterViewModel.SelectedSubject);
             _subjectSetterViewModel.Subjects.Remove(_subjectSetterViewModel.SelectedSubject);
         }

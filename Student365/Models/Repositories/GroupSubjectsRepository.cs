@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Windows;
 
 namespace Student365.Models.Repositories
 {
@@ -26,8 +27,15 @@ namespace Student365.Models.Repositories
 
         public void Remove(Subject selectedSubject)
         {
-            _dbSet_Sub.Remove(selectedSubject);
-            _context.SaveChanges();
+            try
+            {
+                _dbSet_Sub.Remove(selectedSubject);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public ObservableCollection<Subject> GetAllSubjects(short kurs)
@@ -82,10 +90,19 @@ namespace Student365.Models.Repositories
 
         public void Remove(GroupSubject selected)
         {
-            var subject = selected.Subject;
-            _dbSet_Gr.Remove(selected);
-            UnitOfWork.LabWorksRepository.RemoveLabInfo(selected, subject);
-            _context.SaveChanges();
+            try
+            {
+                if (selected is null)
+                { return; }
+                var subject = selected.Subject;
+                _dbSet_Gr.Remove(selected);
+                UnitOfWork.LabWorksRepository.RemoveLabInfo(selected, subject);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public ObservableCollection<string> GetAllSubjectsNamesByGroupId()

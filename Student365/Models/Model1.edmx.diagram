@@ -4,15 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eb75100e9b1f4fb580a25b93e222bf94" Name="Diagram1">
+      <Diagram DiagramId="edba968992d5430ba8e9d51d614f4a54" Name="Diagram1">
         <EntityTypeShape EntityType="Student365Model.Absence" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Grade" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Student365Model.GroupSubject" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.GroupSubject" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.LabWork" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Note" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Schedule" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Student" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Subject" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Student365Model.sysdiagram" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.Teacher" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Student365Model.User" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
         <AssociationConnector Association="Student365Model.FK__Absence__Subject__245D67DE" ManuallyRouted="false" />

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Student365.ViewModels.TeachersRepository" Collapsed="true">
+    <Position X="32" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAIAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Repositories\TeachersRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.AbsenceViewModel" Collapsed="true">
+    <Position X="16.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAEAQAAIABAAAAEAAAAAAAAABIACAAAACAAY=</HashCode>
+      <FileName>ViewModels\AbsenceViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.BaseViewModel" Collapsed="true">
+    <Position X="20.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Student365.ViewModels.GradeViewModel" Collapsed="true">
+    <Position X="21" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAEAAAAAAAAAChAAABAAAACAAAEEAAAAAACEAQAI=</HashCode>
+      <FileName>ViewModels\GradeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.GroupViewModel" Collapsed="true">
+    <Position X="27.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\GroupViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.LabWorksViewModel" Collapsed="true">
+    <Position X="18.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQACAAAAAAAQAAAgAAAAAAgAABAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\LabWorksViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAQBAAAAAAAAAAAACAAIAAACAAAA=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.MainViewModel" Collapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAIAIMAAIAAgAAgAQAAAAAEhEASAAECAAAI=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.NavItems" Collapsed="true">
+    <Position X="30.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.NoteViewModel" Collapsed="true">
+    <Position X="23.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIwEAAAAAAAAAAAQQEAAAAAABAEAAAIAAAAiAAAAAE=</HashCode>
+      <FileName>ViewModels\NoteViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.ScheduleSetterViewModel" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAYQkIAACQAACAAAAAAACACMCAAIAABACAQCAAAgAA=</HashCode>
+      <FileName>ViewModels\ScheduleSetterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.ScheduleViewModel" Collapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAACAAgAAAPwAAAAABAA=</HashCode>
+      <FileName>ViewModels\ScheduleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.SubjectSetterViewModel" Collapsed="true">
+    <Position X="14.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAlAAAAAAEACQAAAAIAAgBCAAAAABAACAAAFAAAI=</HashCode>
+      <FileName>ViewModels\SubjectSetterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.UserControlViewModel" Collapsed="true">
+    <Position X="25.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAACAAAgAECgBAAAAAABgAAAIEAAAABAAAgAAI=</HashCode>
+      <FileName>ViewModels\UserControlViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.StudentControlViewModel" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAYAIBAAAIgAECgQAAAABABAABAAEIAAAAEAgIQAA=</HashCode>
+      <FileName>ViewModels\UserControlViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student365.ViewModels.TeacherControlView" Collapsed="true">
+    <Position X="27.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>ViewModels\UserControlViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -66,7 +66,7 @@
 
                     <StackPanel Background="White">
 
-                        <DataGrid  ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                        <DataGrid  ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Username" Binding="{Binding UserName}">
                                 </DataGridTextColumn>
@@ -90,7 +90,7 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem DataContext="{StaticResource StudentControlView}"
-                Header="TAB 2" Visibility="{Binding vis}">
+                Header="TAB 2" Visibility="{Binding vis}" IsSelected="True">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200">
@@ -166,7 +166,7 @@
                         </StackPanel>
                     </materialDesign:DialogHost.DialogContent>
                     <Grid>
-                        <DataGrid  ItemsSource="{Binding Students}" AutoGenerateColumns="False" SelectedItem="{Binding Selected_Student,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                        <DataGrid  ItemsSource="{Binding Students}" AutoGenerateColumns="False" SelectedItem="{Binding Selected_Student,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                                 <DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
@@ -231,7 +231,7 @@
 
                     <StackPanel Background="White">
 
-                        <DataGrid  ItemsSource="{Binding Teachers}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False">
+                        <DataGrid  ItemsSource="{Binding Teachers}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Username" Binding="{Binding Name}">
                                 </DataGridTextColumn>
