@@ -45,19 +45,39 @@
             </materialDesign:DialogHost.DialogContent>
             <StackPanel>
                 <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  Cursor="Hand"  Foreground="Black"  Content="{DynamicResource Add}" Background="DarkGray"></Button>
-                <DataGrid ItemsSource="{Binding Absences,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.Row="0" CanUserAddRows="False">
+                <DataGrid ItemsSource="{Binding Absences,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.Row="0" CanUserAddRows="False" MaxHeight="600">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Date" Binding="{Binding Date,Converter={StaticResource DateConverter}}" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Reason" Binding="{Binding Reason}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn  Binding="{Binding Subject}" Width="*">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource subject}"></TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn  Binding="{Binding Date,Converter={StaticResource DateConverter}}" Width="*">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource date}"></TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn  Binding="{Binding Reason}" Width="*">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{DynamicResource reason}"></TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </materialDesign:DialogHost>
         <DataGrid Grid.Row="1" ItemsSource="{Binding AbsenceCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Binding="{Binding Key}" Header="Subject"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Binding="{Binding Value}" Header="Count"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Binding="{Binding Key}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource subject}"></TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*" Binding="{Binding Value}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource count}"></TextBlock>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

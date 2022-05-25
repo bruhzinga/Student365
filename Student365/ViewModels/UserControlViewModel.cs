@@ -14,10 +14,7 @@ namespace Student365.ViewModels
 
         public ObservableCollection<User> Users
         {
-            get
-            {
-                return _users;
-            }
+            get { return _users; }
             set
             {
                 _users = value;
@@ -29,10 +26,7 @@ namespace Student365.ViewModels
 
         public ObservableCollection<string> Roles
         {
-            get
-            {
-                return _roles;
-            }
+            get { return _roles; }
             set
             {
                 _roles = value;
@@ -44,10 +38,7 @@ namespace Student365.ViewModels
 
         public User Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get { return _selected; }
             set
             {
                 _selected = value;
@@ -60,10 +51,7 @@ namespace Student365.ViewModels
 
         public string NewUsername
         {
-            get
-            {
-                return _newUserName;
-            }
+            get { return _newUserName; }
             set
             {
                 _newUserName = value;
@@ -75,10 +63,7 @@ namespace Student365.ViewModels
 
         public string NewPassword
         {
-            get
-            {
-                return _newPassword;
-            }
+            get { return _newPassword; }
             set
             {
                 _newPassword = value;
@@ -90,10 +75,7 @@ namespace Student365.ViewModels
 
         public string NewRole
         {
-            get
-            {
-                return _newRole;
-            }
+            get { return _newRole; }
             set
             {
                 _newRole = value;
@@ -375,17 +357,17 @@ namespace Student365.ViewModels
         }
     }
 
-    public class TeacherControlView : BaseViewModel
+    public class TeacherControlView : BaseViewModel, IDataErrorInfo
     {
         private ObservableCollection<Teacher> _teachers;
+        private string _newname;
+        private string _newuserName;
+        private static ObservableCollection<string> _usernames;
 
         public ObservableCollection<Teacher> Teachers
 
         {
-            get
-            {
-                return _teachers;
-            }
+            get { return _teachers; }
             set
             {
                 _teachers = value;
@@ -393,9 +375,15 @@ namespace Student365.ViewModels
             }
         }
 
+        public ICommand DeleteCommand { get; }
+        public ICommand AddCommand { get; }
+
         public TeacherControlView()
         {
             Teachers = UnitOfWork.TeachersRepository.GetAll();
+            Usernames = UnitOfWork.UsersRepository.GetVacantTeacherUsernames();
+            AddCommand = new AddTeacherCommand(this);
+            DeleteCommand = new DeleteTeacherCommand(this);
         }
 
         public string vis
@@ -405,6 +393,79 @@ namespace Student365.ViewModels
                 if (UnitOfWork.CurrentsUser.Role == "Admin")
                     return "Visible";
                 return "Collapsed";
+            }
+        }
+
+        private Teacher _selected;
+
+        public Teacher Selected
+        {
+            get => _selected;
+            set
+            {
+                _selected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public static ObservableCollection<string> Usernames
+        {
+            get => _usernames;
+            set
+            {
+                _usernames = value;
+            }
+        }
+
+        public string NewName
+        {
+            get => _newname;
+            set
+            {
+                _newname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string NewUsername
+        {
+            get => _newuserName;
+            set
+            {
+                _newuserName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(NewUsername):
+                        if (string.IsNullOrEmpty(NewUsername))
+                            error = "Username is required";
+
+                        break;
+
+                    case nameof(NewName):
+                        if (string.IsNullOrEmpty(NewName))
+                            error = "Name is required";
+                        if (NewName?.Length > 50)
+                            error = "Name must be less than 50";
+
+                        break;
+                }
+
+                return error;
             }
         }
     }

@@ -191,8 +191,10 @@
     <Compile Include="Commands\SubjectSetterCommand\DeleteSubjectCommand.cs" />
     <Compile Include="Commands\SubjectSetterCommand\SyncCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\AddStudentCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\AddTeacherCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\AddUserCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\DeleteStudentCommand.cs" />
+    <Compile Include="Commands\UserControlViewModel\DeleteTeacherCommand.cs" />
     <Compile Include="Commands\UserControlViewModel\DeleteUserCommand.cs" />
     <Compile Include="Models\Absence.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -383,6 +385,7 @@
     <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBgeneration.sql" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

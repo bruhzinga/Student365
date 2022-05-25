@@ -1,4 +1,5 @@
-﻿using Student365.Models.Repositories;
+﻿using System.Runtime.InteropServices;
+using Student365.Models.Repositories;
 using Student365.ViewModels;
 
 namespace Student365.Commands.AbsenceCommands
@@ -10,6 +11,24 @@ namespace Student365.Commands.AbsenceCommands
         public AddAbsenceCommand(AbsenceViewModel absenceViewModel)
         {
             _absenceViewModel = absenceViewModel;
+            _absenceViewModel.PropertyChanged += AbsenceViewModel_PropertyChanged;
+        }
+
+        private void AbsenceViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Selected" || e.PropertyName == "Reason")
+            {
+                OnCanExecuteChanged();
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            if (_absenceViewModel["Selected"] != null || _absenceViewModel["Reason"] != null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public override void Execute(object parameter)

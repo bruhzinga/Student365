@@ -24,11 +24,31 @@
             </TextBox>
             <DataGrid Style="{StaticResource MaterialDesignDataGrid}" ItemsSource="{Binding Students}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center"  VerticalAlignment="Stretch" FontSize="20" Padding="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Name" Binding="{Binding Name}" Width="2*"></DataGridTextColumn>
-                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Group" Binding="{Binding Group}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Kurs" Binding="{Binding Kurs}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Sub Group" Binding="{Binding SubGroup}" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Phone" Binding="{Binding Phone}" Width="2*"></DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Binding="{Binding Name}" Width="2*">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource Name}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Binding="{Binding Group}" Width="*">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource group}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Binding="{Binding Kurs}" Width="*">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource Kurs}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}"  Binding="{Binding SubGroup}" Width="*">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource sub}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn CellStyle="{StaticResource MaterialDesignDataGridCell}"  Binding="{Binding Phone}" Width="2*">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource phone}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

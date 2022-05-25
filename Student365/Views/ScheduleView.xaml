@@ -34,17 +34,17 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <uc:ScheduleDataGrid Text="Понедельник">
+                    <uc:ScheduleDataGrid Text="{DynamicResource monday}">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule1_1" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
-                    <uc:ScheduleDataGrid Text="Вторник" Grid.Column="1">
+                    <uc:ScheduleDataGrid Text="{DynamicResource Tuesday}" Grid.Column="1">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule2_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
-                    <uc:ScheduleDataGrid Text="Среда" Grid.Column="3">
+                    <uc:ScheduleDataGrid Text="{DynamicResource Wednesday}" Grid.Column="3">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule3_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
@@ -57,17 +57,17 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <uc:ScheduleDataGrid Text="Четверг" Grid.Column="0">
+                    <uc:ScheduleDataGrid Text="{DynamicResource Thursday}" Grid.Column="0">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule4_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
-                    <uc:ScheduleDataGrid Text="Пятница" Grid.Column="1">
+                    <uc:ScheduleDataGrid Text="{DynamicResource Friday}" Grid.Column="1">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule5_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>
                     </uc:ScheduleDataGrid>
-                    <uc:ScheduleDataGrid Text="Суббота" Grid.Column="2">
+                    <uc:ScheduleDataGrid Text="{DynamicResource Saturday}" Grid.Column="2">
                         <uc:ScheduleDataGrid.Schedule>
                             <Binding Path="Schedule6_1"   Source="{StaticResource ScheduleViewModel}" />
                         </uc:ScheduleDataGrid.Schedule>

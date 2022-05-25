@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Student365.Commands.AbsenceCommands;
@@ -9,7 +10,7 @@ using Student365.Models.Repositories;
 
 namespace Student365.ViewModels
 {
-    public class AbsenceViewModel : BaseViewModel
+    public class AbsenceViewModel : BaseViewModel, IDataErrorInfo
     {
         private ObservableCollection<string> _subjectsList;
 
@@ -81,6 +82,46 @@ namespace Student365.ViewModels
         }
 
         public ICommand AddAbsenceCommand { get; set; }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(Reason):
+                        if (string.IsNullOrEmpty(Reason))
+                        {
+                            error = "Поле не может быть пустым";
+                            break;
+                        }
+                        if (Reason?.Length > 30)
+                        {
+                            error = "Поле не может быть длиннее 30 cимволов";
+                        }
+
+                        break;
+
+                    case nameof(Selected):
+                        if (string.IsNullOrEmpty(Selected))
+                        {
+                            error = "Поле не может быть пустым";
+                            break;
+                        }
+
+                        break;
+                }
+
+                return error;
+            }
+        }
 
         public AbsenceViewModel()
         {

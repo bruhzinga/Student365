@@ -45,7 +45,15 @@ namespace Student365.Commands.UserControlViewModel
             UnitOfWork.UsersRepository.AddOrUpdate(user);
             if (!_userControlViewModel.Users.Select(x => x.UserName).Contains(user.UserName))
                 _userControlViewModel.Users.Add(user);
-            StudentControlViewModel.Usernames.Add(user.UserName);
+            if (user.Role == "user")
+            {
+                StudentControlViewModel.Usernames.Add(user.UserName);
+            }
+
+            if (user.Role == "Teacher")
+            {
+                TeacherControlView.Usernames.Add(user.UserName);
+            }
         }
     }
 }

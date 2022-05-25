@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Dynamic;
 using System.IO.Ports;
 using System.Linq;
@@ -8,7 +9,7 @@ using Student365.Models.Repositories;
 
 namespace Student365.ViewModels
 {
-    public class ScheduleSetterViewModel : BaseViewModel
+    public class ScheduleSetterViewModel : BaseViewModel, IDataErrorInfo
     {
         #region COLLECTIONS
 
@@ -175,6 +176,59 @@ namespace Student365.ViewModels
             {
                 "ЛК", "ПЗ", "ЛР"
             };
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(Group)
+                        :
+                        if (string.IsNullOrEmpty(Group.ToString()))
+                            error = "Group is required";
+
+                        if (Group > 10)
+                            error = "Group must be less than 10";
+                        if (Group < 1)
+                            error = "Group must be greater than 0";
+
+                        break;
+
+                    case nameof(Kurs):
+                        if (string.IsNullOrEmpty(Kurs.ToString()))
+                            error = "Kurs is required";
+
+                        if (Kurs > 5)
+                            error = "Kurs must be less than 5";
+                        if (Kurs < 1)
+                            error = "Kurs must be greater than 0";
+
+                        break;
+
+                    case nameof(Subgroup):
+                        if (string.IsNullOrEmpty(Subgroup.ToString()))
+                            error = "Subgroup is required";
+
+                        //Subgroup must be 1 or 2;
+                        if (Subgroup > 2)
+                            error = "Subgroup must be less than 3";
+                        if (Subgroup < 1)
+                            error = "Subgroup must be greater than 0";
+
+                        break;
+                }
+
+                return error;
+            }
         }
 
         public void SetDays(short group, short sub, short week, short kurs)

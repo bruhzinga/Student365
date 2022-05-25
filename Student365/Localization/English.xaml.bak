@@ -19,7 +19,7 @@
     <sys:String x:Key="Saturday">Saturday</sys:String>
     <sys:String x:Key="type">Type</sys:String>
     <sys:String x:Key="Auditorium">Auditorium</sys:String>
-    <sys:String x:Key="Name">Name</sys:String>
+    <sys:String x:Key="Name">Имя</sys:String>
     <sys:String x:Key="group">Group</sys:String>
     <sys:String x:Key="Kurs">Kurs</sys:String>
     <sys:String x:Key="sub">Sub group</sys:String>

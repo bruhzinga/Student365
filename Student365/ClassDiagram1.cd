@@ -3,25 +3,17 @@
   <Class Name="Student365.ViewModels.TeachersRepository" Collapsed="true">
     <Position X="32" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAIAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAAAABAAAAAAAJAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Models\Repositories\TeachersRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Student365.ViewModels.AbsenceViewModel">
     <Position X="23.25" Y="8.25" Width="1.5" />
-    <InheritanceLine Type="Student365.ViewModels.BaseViewModel" FixedToPoint="true">
-      <Path>
-        <Point X="21.5" Y="1.812" />
-        <Point X="21.5" Y="1.935" />
-        <Point X="25.125" Y="1.935" />
-        <Point X="25.125" Y="12.309" />
-        <Point X="24.75" Y="12.309" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAEAAAAAAEAQAAIABAAAAEAAAAAAAAABIACAAAACAAY=</HashCode>
+      <HashCode>AAEAAAAAAEAQAAIADAEAAEAAAAAAAAABIACAAAACAAY=</HashCode>
       <FileName>ViewModels\AbsenceViewModel.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Student365.ViewModels.BaseViewModel" Collapsed="true">
     <Position X="20.75" Y="1.25" Width="1.5" />
@@ -101,9 +93,10 @@
   <Class Name="Student365.ViewModels.ScheduleSetterViewModel">
     <Position X="16.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAYQkIAACQAACAAAAAAACACMCAAIAABACAQCAAAgAA=</HashCode>
+      <HashCode>AgAYQkIAACQAACAACAEAACACMCAAIAABACAQCAAAgAA=</HashCode>
       <FileName>ViewModels\ScheduleSetterViewModel.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Student365.ViewModels.ScheduleViewModel" Collapsed="true">
     <Position X="25.5" Y="2.5" Width="1.5" />
@@ -138,9 +131,10 @@
   <Class Name="Student365.ViewModels.TeacherControlView">
     <Position X="27.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>BQAAAAABBAAAgAECCQAAAAAAAAAAAAEAAAAAAgAAAAI=</HashCode>
       <FileName>ViewModels\UserControlViewModel.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

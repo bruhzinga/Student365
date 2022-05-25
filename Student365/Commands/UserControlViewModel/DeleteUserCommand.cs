@@ -28,6 +28,16 @@ namespace Student365.Commands.UserControlViewModel
         {
             StudentControlViewModel.Usernames.Remove(_userControlViewModel.Selected.UserName);
             UnitOfWork.UsersRepository.Remove(_userControlViewModel.Selected);
+            if (_userControlViewModel.Selected.Role == "User")
+            {
+                StudentControlViewModel.Usernames.Remove(_userControlViewModel.Selected.UserName);
+            }
+
+            if (_userControlViewModel.Selected.Role == "Teacher")
+            {
+                TeacherControlView.Usernames.Remove(_userControlViewModel.Selected.UserName);
+            }
+
             _userControlViewModel.Users.Remove(_userControlViewModel.Selected);
         }
 

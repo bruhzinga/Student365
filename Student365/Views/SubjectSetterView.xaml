@@ -58,7 +58,8 @@
                 </DataGrid>
                 <Button Command="{Binding AddToSelected}">ADD TO SELECTED GROUP</Button>
                 <TextBox
-                    materialDesign:HintAssist.Hint="Kurs" Foreground="Black" Cursor="Arrow">
+                    materialDesign:HintAssist.Hint="Kurs" Foreground="Black" Cursor="Arrow"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}">
 
                     <TextBox.Text>
                         <Binding
@@ -74,7 +75,7 @@
         <Grid Grid.Column="1">
             <StackPanel>
                 <TextBox
-                    materialDesign:HintAssist.Hint="Group" Foreground="Black">
+                    materialDesign:HintAssist.Hint="Group" Foreground="Black" Style="{StaticResource MaterialDesignOutlinedTextBox}">
                     <TextBox.Text>
                         <Binding
                             Path="Group"

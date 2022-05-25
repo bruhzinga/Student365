@@ -97,6 +97,8 @@ namespace Student365.ViewModels
 
         public SubjectSetterViewModel()
         {
+            Group = 4;
+            Kurs = 2;
             Subjects = UnitOfWork.GroupSubjectsRepository.GetAllSubjects(Kurs);
             Sync = new SyncCommand(this);
             AddToSelected = new AddToSelectedCommand(this);

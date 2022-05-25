@@ -21,8 +21,6 @@ namespace Student365.ViewModels
         {
             get
             {
-                if (_username == null)
-                    return "Admin";
                 return _username;
             }
             set
@@ -38,11 +36,6 @@ namespace Student365.ViewModels
         {
             get
             {
-                if (_password == null)
-                {
-                    return "Admin";
-                }
-
                 return _password;
             }
             set

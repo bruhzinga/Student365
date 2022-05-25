@@ -11,9 +11,16 @@
         <DataGrid ItemsSource="{Binding LabWorks,Mode=TwoWay}"  DockPanel.Dock="Left" AutoGenerateColumns="False"
                  SelectedItem="{Binding SelectedItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Subject }">
+                <DataGridTextColumn Width="*"  Binding="{Binding Subject }">
+                    <DataGridTextColumn.Header>
+                        <TextBox Text="{DynamicResource subject}"></TextBox>
+                    </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Header="Progress" Width="4*">
+                <DataGridTemplateColumn  Width="4*">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{DynamicResource progress}"></TextBlock>
+                    </DataGridTemplateColumn.Header>
+
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ProgressBar Value="{Binding Completion,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Background="Red" Foreground="Aqua" />
@@ -21,8 +28,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Width="*" Header="Current" Binding="{Binding Current_amount_of_Labs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged }" />
-                <DataGridTextColumn Width="*" Header="Max" Binding="{Binding Max_amount_of_Labs,Mode=TwoWay}" />
+                <DataGridTextColumn Width="*" Binding="{Binding Current_amount_of_Labs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged }">
+                    <DataGridTextColumn.Header>
+                        <TextBox Text="{DynamicResource current}"></TextBox>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*"  Binding="{Binding Max_amount_of_Labs,Mode=TwoWay}">
+                    <DataGridTextColumn.Header>
+                        <TextBox Text="{DynamicResource max}"></TextBox>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

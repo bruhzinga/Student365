@@ -18,7 +18,7 @@
         <TabControl
             materialDesign:ColorZoneAssist.Mode="PrimaryLight">
             <TabItem DataContext="{StaticResource UserControlView}"
-                Header="TAB 1" Visibility="{Binding vis}">
+                Header="USERS" Visibility="{Binding vis}">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200" Margin="20">
@@ -73,13 +73,13 @@
 
                     <StackPanel Background="White">
 
-                        <DataGrid  ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
+                        <DataGrid  ItemsSource="{Binding Users}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False" MaxHeight="550">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Username" Binding="{Binding UserName}">
+                                <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*" IsReadOnly="True">
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
-                                <DataGridComboBoxColumn Header="Role"  ItemsSource="{Binding Roles,Source={StaticResource UserControlView}}" SelectedItemBinding="{Binding Role,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridComboBoxColumn>
-                                <DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="*"></DataGridTextColumn>
+                                <DataGridComboBoxColumn Header="Role" Width="*" ItemsSource="{Binding Roles,Source={StaticResource UserControlView}}" SelectedItemBinding="{Binding Role,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridComboBoxColumn>
+                                <DataGridTemplateColumn Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteCommand,
@@ -97,7 +97,7 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem DataContext="{StaticResource StudentControlView}"
-                Header="TAB 2" Visibility="{Binding vis}" IsSelected="True">
+                Header="Student" Visibility="{Binding vis}" IsSelected="True">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel Orientation="Vertical" MinWidth="200" Margin="10">
@@ -188,15 +188,15 @@
                     <Grid>
                         <StackPanel>
 
-                            <DataGrid  ItemsSource="{Binding Students}" AutoGenerateColumns="False" SelectedItem="{Binding Selected_Student,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
+                            <DataGrid  ItemsSource="{Binding Students}" AutoGenerateColumns="False" SelectedItem="{Binding Selected_Student,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="True"  MaxHeight="450">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                    <DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
+                                    <DataGridTextColumn Header="Name"  Width="*" Binding="{Binding Name}" />
+                                    <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="*" />
 
-                                    <DataGridTextColumn Header="Group" Binding="{Binding Group}"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Kurs" Binding="{Binding Kurs}"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Subgroup" Binding="{Binding SubGroup}"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Group" Binding="{Binding Group}" Width="*" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Kurs" Binding="{Binding Kurs}" Width="*" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Subgroup" Binding="{Binding SubGroup}" Width="*" ></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Phone" Width="*" Binding="{Binding Phone}"></DataGridTextColumn>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -216,32 +216,36 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem
-                Header="TAB 3" DataContext="{StaticResource TeacherControlView}" Visibility="{Binding vis}">
+                Header="Teacher" DataContext="{StaticResource TeacherControlView}" Visibility="{Binding vis}">
                 <materialDesign:DialogHost>
                     <materialDesign:DialogHost.DialogContent>
-                        <StackPanel Orientation="Vertical" MinWidth="200">
-                            <TextBox
+                        <StackPanel Orientation="Vertical" MinWidth="200" Margin="10">
+                            <TextBox Padding="10" Margin="10"
                         materialDesign:HintAssist.Hint="Name">
                                 <TextBox.Text>
                                     <Binding
                                 Path="NewName"
                                 Mode="TwoWay"
                                 UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidatesOnDataErrors>
+                                            True
+                                        </Binding.ValidatesOnDataErrors>
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <ComboBox Foreground="Black"
+                            <ComboBox Foreground="Black" Margin="10"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                       materialDesign:HintAssist.Hint="Some item"
-                                      ItemsSource="{Binding Usernames,Source={StaticResource StudentControlView}}"
+                                      ItemsSource="{Binding Usernames,Source={StaticResource TeacherControlView}}"
                                       Width="100">
                                 <ComboBox.SelectedItem>
                                     <Binding
                                         Path="NewUsername"
                                         Mode="TwoWay"
                                         UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                        </Binding.ValidationRules>
+                                        <Binding.ValidatesOnDataErrors>
+                                            True
+                                        </Binding.ValidatesOnDataErrors>
                                     </Binding>
                                 </ComboBox.SelectedItem>
                             </ComboBox>
@@ -254,12 +258,12 @@
 
                     <StackPanel Background="White">
 
-                        <DataGrid  ItemsSource="{Binding Teachers}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" IsReadOnly="False">
+                        <DataGrid  ItemsSource="{Binding Teachers}" AutoGenerateColumns="False" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False"   MaxHeight="450" IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Username" Binding="{Binding Name}">
+                                <DataGridTextColumn Header="Username" Binding="{Binding Name}" Width="*">
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Password" Binding="{Binding Username}"></DataGridTextColumn>
-                                <DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Password" Binding="{Binding Username}" Width="*"></DataGridTextColumn>
+                                <DataGridTemplateColumn  Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Style="{DynamicResource MaterialDesignIconButton}" Background="Red"  Command="{Binding Path=DataContext.DeleteCommand,

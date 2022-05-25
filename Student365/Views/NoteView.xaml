@@ -26,19 +26,19 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-            <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatDarkButton}" Background="Red" Command="{Binding DeleteNoteCommand}" Margin="0,10,0,0 " Content="Delete Note" Cursor="Hand" />
+            <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatDarkButton}" Background="Red" Command="{Binding DeleteNoteCommand}" Margin="0,10,0,0 " Content="{DynamicResource delete}" Cursor="Hand" />
         </Grid>
 
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" Padding="5,5,5,50" CornerRadius="2">
             <StackPanel>
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Cursor="Arrow" Text="{Binding NewNoteHeader, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Foreground="Black" TextWrapping="Wrap" Margin="10 30 10 01" Width="398" />
-                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="#FF2B92E2" Content="Add note" Command="{Binding AddNoteCommand}" Cursor="Hand" Margin="0 10 0 10" />
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Background="#FF2B92E2" Content="{DynamicResource Add}" Command="{Binding AddNoteCommand}" Cursor="Hand" Margin="0 10 0 10" />
 
                 <TextBox  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextAlignment="Center" Text="{Binding Text,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Foreground="Black" BorderBrush="Black" BorderThickness="1" MinWidth="400" MinHeight="200" Background="Azure" TextWrapping="Wrap" Height="209" Width="573" />
                 <TextBox Style="{StaticResource MaterialDesignTextBox}" Foreground="Black" Text="{Binding SelectedName}" HorizontalAlignment="Center" Margin="10 90 10 10" ></TextBox>
             </StackPanel>
         </Border>
 
-        <Button Grid.Column="1" Content="Confirm" HorizontalAlignment="Center"  Command="{Binding SubmitCommand}" VerticalAlignment="Top" Margin="0,393,0,0" Cursor="Hand" Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
+        <Button Grid.Column="1" Content="{DynamicResource confirm}" HorizontalAlignment="Center"  Command="{Binding SubmitCommand}" VerticalAlignment="Top" Margin="0,393,0,0" Cursor="Hand" Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
     </Grid>
 </UserControl>

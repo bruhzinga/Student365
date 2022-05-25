@@ -13,9 +13,21 @@
             <DataGrid Grid.Column="0" ItemsSource="{Binding Schedule,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"  x:Name="THEGRID">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}" Width="0.5*"></DataGridTextColumn>
-                    <DataGridTextColumn Width="1.5*" Header="Предмет" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="0.8*" Header="Тип" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="1.2*" Header="Аудитория" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="1.5*"  Binding="{Binding Subject,Mode=TwoWay}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource subject}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="0.8*" Binding="{Binding Subject_Type,Mode=TwoWay}">
+                        <DataGridTextColumn.Header>
+                            <TextBox Text="{DynamicResource type}"></TextBox>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="1.2*"  Binding="{Binding Auditorium,Mode=TwoWay}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{DynamicResource Auditorium}"></TextBlock>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

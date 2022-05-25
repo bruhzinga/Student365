@@ -94,5 +94,11 @@ namespace Student365.Models.Repositories
             var temp = UnitOfWork.StudentsRepository.GetAllStudents().Select(y => y.UserName).ToList();
             return new ObservableCollection<string>(_dbSet.Where(x => x.Role == "User" && !temp.Contains(x.UserName)).Select(x => x.UserName).ToList());
         }
+
+        public ObservableCollection<string> GetVacantTeacherUsernames()
+        {
+            var temp = UnitOfWork.TeachersRepository.GetAll().Select(y => y.Username).ToList();
+            return new ObservableCollection<string>(_dbSet.Where(x => x.Role == "Teacher" && !temp.Contains(x.UserName)).Select(x => x.UserName).ToList());
+        }
     }
 }

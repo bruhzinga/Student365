@@ -19,5 +19,17 @@ namespace Student365.ViewModels
         {
             return new ObservableCollection<Teacher>(_dbSet.ToList());
         }
+
+        public void Add(Teacher teacher)
+        {
+            _dbSet.Add(teacher);
+            _context.SaveChanges();
+        }
+
+        public void Remove(Teacher selected)
+        {
+            _dbSet.Remove(selected);
+            _context.SaveChanges();
+        }
     }
 }
