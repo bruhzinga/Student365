@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Student365.Models.Repositories
 {
@@ -53,7 +54,7 @@ namespace Student365.Models.Repositories
                                 Subject_Num = j
                             };
                             _dbSet.Add(schedule);
-                            _context.SaveChanges();
+                            Update();
                         }
                     }
                 }
@@ -66,7 +67,14 @@ namespace Student365.Models.Repositories
 
         public void Update()
         {
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

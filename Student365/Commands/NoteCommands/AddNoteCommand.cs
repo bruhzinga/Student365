@@ -29,7 +29,7 @@ namespace Student365.Commands
 
         public override bool CanExecute(object parameter)
         {
-            if (string.IsNullOrEmpty(NoteViewModel.NewNoteHeader))
+            if (string.IsNullOrEmpty(NoteViewModel.NewNoteHeader) || NoteViewModel["NewNoteHeader"] != null)
             {
                 return false;
             }

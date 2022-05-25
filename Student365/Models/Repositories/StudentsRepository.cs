@@ -48,6 +48,7 @@ namespace Student365.Models.Repositories
         public void Remove(Student item)
         {
             _dbSet.Remove(item);
+            _context.SaveChanges();
         }
 
         public void Update(Student item)

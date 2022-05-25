@@ -16,7 +16,7 @@
                 AcceptsReturn="True"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto"
-                materialDesign:HintAssist.Hint="This is a text area"
+                materialDesign:HintAssist.Hint="Group"
                 Foreground="Black">
                 <TextBox.Text>
                     <Binding Path="Group" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />

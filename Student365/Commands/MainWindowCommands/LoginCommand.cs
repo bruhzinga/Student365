@@ -49,12 +49,12 @@ namespace Student365.Commands
             }
         }
 
-        /*public override bool CanExecute(object? parameter)
+        public override bool CanExecute(object? parameter)
         {
             if (string.IsNullOrEmpty(_viewModel.Username) || string.IsNullOrEmpty(_viewModel.Password))
                 return false;
             return true;
-        }*/
+        }
 
         public LoginCommand(LoginViewModel viewModel)
         {

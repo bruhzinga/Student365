@@ -14,8 +14,10 @@ namespace Student365.Commands.UserControlViewModel
 
         public override void Execute(object parameter)
         {
+            var vacant = _studentControlViewModel.Selected_Student.UserName;
             UnitOfWork.StudentsRepository.Remove(_studentControlViewModel.Selected_Student);
             _studentControlViewModel.Students.Remove(_studentControlViewModel.Selected_Student);
+            StudentControlViewModel.Usernames.Add(vacant);
         }
     }
 }

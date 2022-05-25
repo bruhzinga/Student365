@@ -19,10 +19,10 @@
 
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
-                <StackPanel>
-                    <ComboBox Foreground="Black"
+                <StackPanel Margin="10" MinWidth="200">
+                    <ComboBox MinWidth="200" Margin="10"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                  materialDesign:HintAssist.Hint="Some item"
+                                  materialDesign:HintAssist.Hint="Choose Subject"
                                   ItemsSource="{Binding SubjectList}"
                                   Width="200">
                         <ComboBox.SelectedItem>
@@ -35,17 +35,16 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBlock Text="Choose Date"  FontSize="25" VerticalAlignment="Center" Foreground="Black"></TextBlock>
-                    <DatePicker Margin="20,0,0,0" Foreground="Black" Text="{Binding Date,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
-                    <TextBlock Text="Write a reason" VerticalAlignment="Center" FontSize="25" Padding="10,0,0,0" Foreground="Black"></TextBlock>
-                    <TextBox Text="{Binding Reason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Black"  Padding="0,0,10,0" Width="120" Cursor="Arrow"></TextBox>
+                    <DatePicker materialDesign:HintAssist.Hint ="Date"  Margin="10" Padding="10" Foreground="Black" Text="{Binding Date,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                    <TextBox  Padding =" 10"  Margin ="10"  Text="{Binding Reason,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Black" materialDesign:HintAssist.Hint="Reason"   MinWidth="200" Cursor="Arrow"></TextBox>
                     <Button Style="{StaticResource MaterialDesignIconButton}" Foreground="Black" Background="Green" Command="{Binding AddAbsenceCommand}" Cursor="Hand">
                         <materialDesign:PackIcon Kind="Plus"></materialDesign:PackIcon>
                     </Button>
+                    <Button   Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="Red" Cursor="Hand">Close</Button>
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
             <StackPanel>
-                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  Cursor="Hand"  Foreground="Red"  Content="PRESS" Background="Black"></Button>
+                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"  Cursor="Hand"  Foreground="Black"  Content="{DynamicResource Add}" Background="DarkGray"></Button>
                 <DataGrid ItemsSource="{Binding Absences,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" Grid.Row="0" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="*"></DataGridTextColumn>
@@ -55,7 +54,11 @@
                 </DataGrid>
             </StackPanel>
         </materialDesign:DialogHost>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding AbsenceCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding AbsenceCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding Key}" Header="Subject"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Binding="{Binding Value}" Header="Count"></DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </UserControl>

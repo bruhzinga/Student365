@@ -17,7 +17,7 @@
 
         materialDesign:ColorZoneAssist.Mode="PrimaryLight">
         <TabItem
-            Header="TAB 1">
+            Header="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition>
@@ -76,7 +76,7 @@
             </Grid>
         </TabItem>
         <TabItem
-            Header="TAB 2">
+            Header="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition>

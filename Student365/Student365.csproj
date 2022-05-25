@@ -291,6 +291,14 @@
     <Compile Include="Views\UserControlView.xaml.cs">
       <DependentUpon>UserControlView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Localization\English.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Localization\Russian.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -372,7 +380,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\ScheduleViewCommands\" />
-    <Folder Include="Localization\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>

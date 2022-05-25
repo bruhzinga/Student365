@@ -6,16 +6,18 @@
              xmlns:local="clr-namespace:Student365.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    <Border Padding="2" CornerRadius="2" BorderBrush="Black">
+        <StackPanel>
 
-    <StackPanel>
-        <TextBlock Text ="{Binding Text}" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
-        <DataGrid Grid.Column="0" ItemsSource="{Binding Schedule,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"  x:Name="THEGRID">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Subject" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Type" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+            <TextBlock Text ="{Binding Text}" Foreground="Black" FontSize="14" TextAlignment="Center" FontWeight="ExtraBlack"></TextBlock>
+            <DataGrid Grid.Column="0" ItemsSource="{Binding Schedule,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"  x:Name="THEGRID">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay}" Width="0.5*"></DataGridTextColumn>
+                    <DataGridTextColumn Width="1.5*" Header="Предмет" Binding="{Binding Subject,Mode=TwoWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="0.8*" Header="Тип" Binding="{Binding Subject_Type,Mode=TwoWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="1.2*" Header="Аудитория" Binding="{Binding Auditorium,Mode=TwoWay}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Border>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Student365.Models.Repositories;
 
 namespace Student365.ViewModels
 {
-    internal class NoteViewModel : BaseViewModel
+    internal class NoteViewModel : BaseViewModel, IDataErrorInfo
     {
         private Note _selectedNote;
 
@@ -101,6 +102,50 @@ namespace Student365.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand AddNoteCommand { get; }
         public ICommand DeleteNoteCommand { get; }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(NewNoteHeader):
+                        if (string.IsNullOrEmpty(NewNoteHeader))
+                        {
+                            error = "Заголовок не может быть пустым";
+                            break;
+                        }
+                        if (NewNoteHeader?.Length > 50)
+                        {
+                            error = "Заголовок не может быть длиннее 50 символов";
+                        }
+
+                        break;
+
+                    case nameof(Text):
+                        if (string.IsNullOrEmpty(Text))
+                        {
+                            error = "Текст не может быть пустым";
+                            break;
+                        }
+                        if (Text?.Length > 1000)
+                        {
+                            error = "Текст не может быть длиннее 1000 символов";
+                        }
+
+                        break;
+                }
+
+                return error;
+            }
+        }
 
         public NoteViewModel()
         {

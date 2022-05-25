@@ -48,7 +48,8 @@
                         <DataGridTextColumn Binding="{Binding Subject_Num,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                         <DataGridComboBoxColumn Header="Subject"  ItemsSource="{Binding Subjects,Source={StaticResource Model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItemBinding="{Binding Subject,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridComboBoxColumn Header="Type"  ItemsSource="{Binding Types,Source={StaticResource Model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItemBinding="{Binding Subject_Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Aud" Binding="{Binding Auditorium,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

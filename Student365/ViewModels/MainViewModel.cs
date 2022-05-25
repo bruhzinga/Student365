@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Student365.Commands;
@@ -31,6 +32,7 @@ namespace Student365.ViewModels
             NavigateToSubjectSetterCommand = new NavigateCommand(_navigationStore, new SubjectSetterViewModel());
             NavigateToGradeCommand = new NavigateCommand(_navigationStore, new GradeViewModel());
             NavigateToScheduleSetterCommand = new NavigateCommand(_navigationStore, new ScheduleSetterViewModel());
+            CurrentLanguage = "Eng";
         }
 
         private void OnCurrentViewModelChanged()
@@ -121,7 +123,7 @@ namespace Student365.ViewModels
 
                 new NavItems()
                 {
-                    Name="UserControl",
+                    Name = "UserControl",
                     Text = "UserControl",
                     Kind = "AccountEdit"
                 },
@@ -140,7 +142,7 @@ namespace Student365.ViewModels
             {
                 new NavItems()
                 {
-                    Name="UserControl",
+                    Name = "UserControl",
                     Text = "UserControl",
                     Kind = "AccountEdit"
                 }
@@ -151,10 +153,7 @@ namespace Student365.ViewModels
 
         public NavItems Selected
         {
-            get
-            {
-                return _selected;
-            }
+            get { return _selected; }
             set
             {
                 _selected = value;
@@ -196,6 +195,7 @@ namespace Student365.ViewModels
                         NavigateToScheduleSetterCommand.Execute(null);
                         break;
                 }
+
                 OnPropertyChanged(nameof(Selected));
             }
         }
@@ -218,6 +218,46 @@ namespace Student365.ViewModels
                     default:
                         return "";
                 }
+            }
+        }
+
+        public ObservableCollection<string> Languages { get; set; } = new ObservableCollection<string>()
+        {
+            "Eng", "Ru"
+        };
+
+        private string _currentLanguage;
+
+        public string CurrentLanguage
+        {
+            get => _currentLanguage;
+            set
+            {
+                _currentLanguage = value;
+                ResourceDictionary dict = new ResourceDictionary();
+                switch (_currentLanguage)
+                {
+                    case "Eng":
+                        dict.Source = new Uri($"Localization/English.xaml", UriKind.Relative);
+                        break;
+
+                    case "Ru":
+                        dict.Source = new Uri($"/Localization/Russian.xaml", UriKind.Relative);
+                        break;
+                }
+                ResourceDictionary oldDict = Application.Current.Resources.MergedDictionaries.Where(x => !(x.Source is null)).FirstOrDefault(x => x.Source.OriginalString.Contains("Localization"));
+                if (oldDict != null)
+                {
+                    int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
+                    Application.Current.Resources.MergedDictionaries.Remove(oldDict);
+                    Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+                }
+                else
+                {
+                    Application.Current.Resources.MergedDictionaries.Add(dict);
+                }
+
+                OnPropertyChanged(nameof(CurrentLanguage));
             }
         }
 

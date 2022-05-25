@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 using Student365.Commands.UserControlViewModel;
 using Student365.Models;
@@ -7,7 +8,7 @@ using Student365.Models.Repositories;
 
 namespace Student365.ViewModels
 {
-    public class UserControlViewModel : BaseViewModel
+    public class UserControlViewModel : BaseViewModel, IDataErrorInfo
     {
         private ObservableCollection<User> _users;
 
@@ -126,9 +127,46 @@ namespace Student365.ViewModels
                 return "Collapsed";
             }
         }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(NewUsername):
+                        if (string.IsNullOrEmpty(NewUsername))
+                            error = "Username is required";
+                        if (UnitOfWork.UsersRepository.GetUsernames().Contains(NewUsername))
+                            error = "Username is already taken";
+
+                        break;
+
+                    case nameof(NewPassword):
+                        if (string.IsNullOrEmpty(NewPassword))
+                            error = "Password is required";
+
+                        break;
+
+                    case nameof(NewRole):
+                        if (string.IsNullOrEmpty(NewRole))
+                            error = "Role is required";
+                        break;
+                }
+
+                return error;
+            }
+        }
     }
 
-    public class StudentControlViewModel : BaseViewModel
+    public class StudentControlViewModel : BaseViewModel, IDataErrorInfo
     {
         private ObservableCollection<Student> _students;
 
@@ -243,9 +281,87 @@ namespace Student365.ViewModels
         public StudentControlViewModel()
         {
             Students = UnitOfWork.StudentsRepository.GetAllStudents();
-            Usernames = UnitOfWork.UsersRepository.GetUsernames();
+            Usernames = UnitOfWork.UsersRepository.GetVacantStudentUsernames();
             DeleteCommand = new DeleteStudentCommand(this);
             AddCommand = new AddStudentCommand(this);
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(NewUsername):
+                        if (string.IsNullOrEmpty(NewUsername))
+                            error = "Username is required";
+
+                        break;
+
+                    case nameof(NewName):
+                        if (string.IsNullOrEmpty(NewName))
+                            error = "Name is required";
+                        break;
+
+                    case nameof(NewGroup)
+                        :
+                        if (string.IsNullOrEmpty(NewGroup))
+                            error = "Group is required";
+                        if (!int.TryParse(NewGroup, out int n))
+                            error = "Group must be a number";
+                        if (n > 10)
+                            error = "Group must be less than 10";
+                        if (n < 1)
+                            error = "Group must be greater than 0";
+
+                        break;
+
+                    case nameof(NewKurs):
+                        if (string.IsNullOrEmpty(NewKurs))
+                            error = "Kurs is required";
+                        if (!int.TryParse(NewKurs, out n))
+                            error = "Kurs must be a number";
+                        if (n > 5)
+                            error = "Kurs must be less than 5";
+                        if (n < 1)
+                            error = "Kurs must be greater than 0";
+
+                        break;
+
+                    case nameof(NewSubgroup):
+                        if (string.IsNullOrEmpty(NewSubgroup))
+                            error = "Subgroup is required";
+                        if (!int.TryParse(NewSubgroup, out n))
+                            error = "Subgroup must be a number";
+                        //Subgroup must be 1 or 2;
+                        if (n > 2)
+                            error = "Subgroup must be less than 3";
+                        if (n < 1)
+                            error = "Subgroup must be greater than 0";
+
+                        break;
+
+                    case nameof(NewPhone):
+                        if (string.IsNullOrEmpty(NewSubgroup))
+                            break;
+
+                        if (!double.TryParse(NewPhone, out double _))
+                            error = "Phone must be a number";
+                        if (NewPhone?.Length < 8 || NewPhone?.Length > 15)
+                            error = "Phone must be between 8 and 15 digits";
+
+                        break;
+                }
+
+                return error;
+            }
         }
 
         public string vis

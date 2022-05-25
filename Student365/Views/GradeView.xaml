@@ -15,10 +15,10 @@
     <Grid Background="AliceBlue" DataContext="{StaticResource Model}">
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
-                <StackPanel MinWidth="200">
-                    <ComboBox Foreground="Black"
+                <StackPanel MinWidth="200" Margin="10">
+                    <ComboBox Foreground="Black" MinWidth="200" Margin="10"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="Some item"
+                              materialDesign:HintAssist.Hint="Grade"
                               ItemsSource="{Binding Subjects_list}"
                               Width="100">
                         <ComboBox.SelectedItem>
@@ -31,7 +31,7 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox
+                    <TextBox Margin="10" Padding="10"
                         materialDesign:HintAssist.Hint="Grade">
                         <TextBox.Text>
 
@@ -54,7 +54,7 @@
 
             <StackPanel>
                 <Grid>
-                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ></Button>
+                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Content="{DynamicResource Add}" ></Button>
                 </Grid>
                 <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Subjects,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>

@@ -8,8 +8,8 @@
         xmlns:vms="clr-namespace:Student365.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Height="760" Width="1000" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" Foreground="{x:Null}" ResizeMode="CanResize" AllowsTransparency="False"
+        Title="Student365"
+        Height="760" Width="1200" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" Foreground="{x:Null}" ResizeMode="CanResize" AllowsTransparency="False"
         Icon="Resources/MyLogo.ico">
     <Window.Resources>
 
@@ -107,6 +107,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" Foreground="Black" Background="Brown"></ComboBox>
                 </StackPanel>
             </Grid>
         </Grid>
